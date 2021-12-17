@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "xyz",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "A personal website powered by Gatsby and React.js",
   "version": "0.1.0",
-  "license": "0BSD",
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -16,16 +16,17 @@
   "dependencies": {
     "gatsby": "^4.4.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "gatsby-plugin-offline": "^2.2.4",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-react-helmet": "^3.1.2",
+    "gatsby-plugin-react-svg": "^2.1.1",
+    "gatsby-plugin-sitemap": "^2.2.3",
+    "react-helmet": "^5.2.1",
+    "react-icons": "^3.7.0",
+    "react-particles-js": "^2.6.0"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
