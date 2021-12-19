@@ -53,6 +53,7 @@ typings/
 
 # firebase config files
 config.js
+.firebase
 
 # dotenv environment variable files
 .env*
