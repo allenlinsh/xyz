@@ -8,14 +8,11 @@ import About from "../components/about"
 import Links from "../components/links"
 import particleOptions from "../../assets/particles.json"
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
 import * as config from "../utils/config"
 
 // Initialize Firebase
-const app = initializeApp(config)
-const analytics = getAnalytics(app)
+initializeApp(config)
 
 const App = () => {
   const data = useStaticQuery(graphql`
