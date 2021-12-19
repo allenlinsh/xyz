@@ -51,6 +51,9 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
+# firebase config files
+config.js
+
 # dotenv environment variable files
 .env*
 

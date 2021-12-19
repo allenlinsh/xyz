@@ -8,13 +8,22 @@ import About from "../components/about"
 import Links from "../components/links"
 import particleOptions from "../../assets/particles.json"
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app"
+import { getAnalytics } from "firebase/analytics"
+import * as config from "../utils/config"
+
+// Initialize Firebase
+const app = initializeApp(config)
+const analytics = getAnalytics(app)
+
 const App = () => {
   const data = useStaticQuery(graphql`
     query {
-      minimalistConfig(id: {eq: "minimalist-config"}) {
-        title,
-        description,
-        siteUrl,
+      minimalistConfig(id: { eq: "minimalist-config" }) {
+        title
+        description
+        siteUrl
         appName
       }
     }
@@ -34,7 +43,10 @@ const App = () => {
 
         <meta name="application-name" content={data.minimalistConfig.appName} />
         <meta name="theme-color" content="#48bfcd" />
-        <meta name="apple-mobile-web-app-title" content={data.minimalistConfig.appName} />
+        <meta
+          name="apple-mobile-web-app-title"
+          content={data.minimalistConfig.appName}
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="mobile-web-app-capable" content="yes" />
