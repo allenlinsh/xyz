@@ -11,7 +11,7 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, {
   // SEO
   title = "Allen Lin",
   description = "Hi there. My name is Allen Lin. I'm a Computer Science student at Northeastern University. I specialize in Machine Learning and Full Stack Development.",
-  siteUrl = "https://allenlin.xyz",
+  siteUrl = "https://allenlinsh.com",
   appName = "Allen Lin",
 
   // Content
