@@ -5,5 +5,13 @@ Feel free to fork the repo and improve on it for your own use. If you want to us
 - [gatsby-config.js](gatsby-config.js)
 - [gatsby-node.js](gatsby-node.js)
 - Rename [config.example.js](src/utils/config.example.js) to `config.js`
+- Initialize a firebase project and edit [.firebaserc](.firebaserc)
 
 Powered by React, Gatsby, and Firebase.
+
+# Deployment
+Just run
+```
+yarn build
+```
+and GitHub Action will handle the rest
