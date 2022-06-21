@@ -10,13 +10,13 @@ exports.createPages = ({ actions, reporter }) => {
 exports.sourceNodes = ({ actions: { createTypes, createNode } }, {
   // SEO
   title = "Allen Lin",
-  description = "Hi there. My name is Allen Lin. I'm a Computer Science student at Northeastern University. I specialize in Machine Learning and Full Stack Development.",
+  description = "Hi there. My name is Allen Lin. I'm a student entrepreneur at Northeastern University. I study Computer Science and specialize in Machine Learning and Mobile App Development.",
   siteUrl = "https://allenlinsh.com",
   appName = "Allen Lin",
 
   // Content
   headline = "Allen Lin",
-  subHeadline = "I'm a <strong>Computer Science</strong> student at Northeastern University.<br/> I specialize in <strong>Machine Learning</strong> and <strong>Full Stack Development</strong>.",
+  subHeadline = "I'm a <strong>student entrepreneur</strong> at Northeastern University. I study Computer Science and specialize in <strong>Machine Learning</strong> and <strong>Mobile App Development</strong>.",
   socialList = [
     {
       icon: "FaGithub",
