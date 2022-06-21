@@ -1,23 +1,21 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://allenlinsh.com"
+    siteUrl: "https://allenlinsh.com",
   },
   plugins: [
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Open Sans\:300,600`
-        ]
-      }
+        fonts: [`Open Sans\:300,600`],
+      },
     },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/
-        }
-      }
+          include: /assets/,
+        },
+      },
     },
     {
       resolve: `gatsby-plugin-sitemap`,
@@ -30,7 +28,7 @@ module.exports = {
                 siteUrl
               }
             }
-            minimalistConfig(id: {eq: "minimalist-config"}) {
+            context(id: {eq: "context"}) {
               title,
               description,
               siteUrl,
@@ -45,17 +43,17 @@ module.exports = {
               }
             }
         }`,
-        serialize: ({ site, minimalistConfig, allSitePage }) =>
+        serialize: ({ site, context, allSitePage }) =>
           allSitePage.edges.map(edge => {
             return {
-              url: minimalistConfig.siteUrl + edge.node.path,
+              url: context.siteUrl + edge.node.path,
               changefreq: `daily`,
-              priority: 0.7
+              priority: 0.7,
             }
-          })
-      }
+          }),
+      },
     },
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-offline`
-  ]
+    `gatsby-plugin-offline`,
+  ],
 }

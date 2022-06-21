@@ -1,20 +1,49 @@
 .headline {
-    font-size: 1.7rem;
-    color: var(--primary-color);
+    font-size: 2.25rem;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .underline {
-    font-size: 1.125rem;
-    color: var(--text-color-dark);
+    font-size: 1.3rem;
 }
 
-@media (min-width: 576px) {
-    .headline {
-        font-size: 2.5rem;
-    }
+p span {
+    opacity: 0.5;
+    display: block;
+    width: 320px;
+    height: auto;
+    cursor: pointer;
+}
 
-    .underline {
-        font-size: 1.5rem;
-    }
+p span:hover {
+    opacity: 1;
+}
+
+.title2 {
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.title1:hover + .title2 {
+    opacity: 1;
+    transition: all 0.5s ease-in;
+}
+
+.title2:hover {
+    opacity: 1;
+    transition: all 0.5s ease-in;
+}
+
+#copy-message {
+    display: none;
+    background-color: #2b2828;
+    color: #ffffff;
+    opacity: 0.45;
+    padding: 6px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
 }

@@ -1,8 +1,7 @@
 {
-  "name": "xyz",
+  "name": "allenlinsh",
   "private": true,
-  "description": "A personal website powered by Gatsby and React.js",
-  "version": "0.1.0",
+  "description": "My portfolio",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -10,8 +9,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "firebase": "^9.6.1",
@@ -24,7 +22,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^5.2.1",
-    "react-icons": "^3.7.0",
     "react-particles-js": "^2.6.0"
   },
   "devDependencies": {

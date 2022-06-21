@@ -6,8 +6,5 @@ export default function NotFoundPage() {
     navigate("/") // redirecting to home page
   }, [])
 
-  return (
-    <div>
-    </div>
-  )
+  return <div></div>
 }
