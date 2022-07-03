@@ -33,13 +33,13 @@ const About = () => {
       </h1>
       <div id={styles.copyMessage}>Email copied</div>
       <p className={styles.underline}>
-        {links.map(({ header, url, ariaLabel }) => (
-          <>
+        {links.map(({ header, url, ariaLabel }, index) => (
+          <React.Fragment key={index}>
             <span aria-label={ariaLabel} onClick={() => openInNewTab(url)}>
               {header}
             </span>
             <br />
-          </>
+          </React.Fragment>
         ))}
       </p>
     </div>

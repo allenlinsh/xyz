@@ -4,8 +4,36 @@
     cursor: pointer;
 }
 
+@media only screen and (max-width: 375px) {
+    .headline {
+        font-size: 1.75rem;
+        font-weight: 300;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 440px) {
+    .headline {
+        font-size: 2rem;
+        font-weight: 300;
+        cursor: pointer;
+    }
+}
+
 .underline {
-    font-size: 1.3rem;
+    font-size: 1.55rem;
+}
+
+@media only screen and (max-width: 375px) {
+    .underline {
+        font-size: 1.15rem;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 440px) {
+    .underline {
+        font-size: 1.35rem;
+    }
 }
 
 p span {
