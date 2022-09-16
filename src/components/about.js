@@ -24,11 +24,11 @@ const About = () => {
           onClick={() => {
             showMessage()
             setTimeout(hideMessage, 2500)
-            navigator.clipboard.writeText("allenlinsh@gmail.com")
+            navigator.clipboard.writeText("allen@makefireplace.com")
           }}
         >
           <span className={styles.title1}>allen</span>
-          <span className={styles.title2}>linsh@gmail.com</span>
+          <span className={styles.title2}>@makefireplace.com</span>
         </div>
       </h1>
       <div id={styles.copyMessage}>Email copied</div>
