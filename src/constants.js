@@ -1,6 +1,6 @@
 export const links = [
   {
-    header: "serial entrepreneur",
+    header: "entrepreneur",
     url: "https://www.linkedin.com/in/allenlinsh",
     ariaLabel: "Link to my LinkedIn profile",
   },
