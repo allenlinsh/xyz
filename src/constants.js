@@ -10,8 +10,18 @@ export const links = [
     ariaLabel: "Link to my Github profile",
   },
   {
-    header: "college student",
+    header: "tech enthusiast",
     url: "https://twitter.com/alnln222",
     ariaLabel: "Link to my Twitter profile",
   },
+  {
+    header: "musician",
+    url: "https://www.youtube.com/@lnln646",
+    ariaLabel: "Link to my YouTube channel",
+  },
+  {
+    header: "photographer",
+    url: "https://www.flickr.com/photos/alnln222",
+    ariaLabel: "Link to my Flickr profile",
+  }
 ]
