@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Allen Lin</title>
+      <link>https://allenlin.dev</link>
+      <description>Last 10 notes on Allen Lin</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Welcome to Quartz</title>
+    <link>https://allenlin.dev/</link>
+    <guid>https://allenlin.dev/</guid>
+    <description>This is a blank Quartz installation. See the documentation for how to get started.</description>
+    <pubDate>Tue, 30 Apr 2024 16:08:58 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

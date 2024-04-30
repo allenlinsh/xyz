@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkallenlinsh=self.webpackChunkallenlinsh||[]).push([[883],{429:function(n,e,u){u.r(e),u.d(e,{default:function(){return c}});var l=u(7294),t=u(1597);function c(){return(0,l.useEffect)((function(){(0,t.c4)("/")}),[]),l.createElement("div",null)}}}]);
-//# sourceMappingURL=component---src-pages-404-js-78e6a8fb019c7b4a9705.js.map

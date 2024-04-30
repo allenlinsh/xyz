@@ -1,13 +1,18 @@
-# :performing_arts: [me](https://allenlinsh.com)
+# Quartz v4
 
-This is a portfolio website to demonstrate my personal and professional achievements.
+> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
 
-Feel free to fork the repo and use the template for yourself. Contact me if you need help.
+Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
 
-Powered by React, Gatsby, and Firebase.
+🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
 
-# Deployment
+[Join the Discord Community](https://discord.gg/cRFFHYye7t)
 
-```
-yarn build
-```
+## Sponsors
+
+<p align="center">
+  <a href="https://github.com/sponsors/jackyzha0">
+    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
+  </a>
+</p>
