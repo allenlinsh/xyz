@@ -15,8 +15,9 @@ _Morning_
   - What I want to achieve today
   - What I'm going to do to achieve it
 - `7:15 AM`: Go for a morning walk or run under direct sunlight for 15 minutes.
-- `7:45 AM`: Take a shower, get dressed, drink a cup of coffee, and eat breakfast.
+- `7:45 AM`: Take a shower, get dressed, and eat breakfast.
 - `8:00 AM`: Start working on the most mentally challenging task for the day.
+- `10:00 AM`: Take a short break and drink a cup of coffee.
 
 _Afternoon_
 
