@@ -20,8 +20,7 @@ export default ((opts?: Options) => {
       <footer class={`${displayClass ?? ""}`}>
         <hr />
         <p>
-          Feel free to reach out!{" "}
-          <span class="email">allenlinsh [at] gmail [dot] com</span>
+          Email: <span class="email">allenlinsh [at] gmail [dot] com</span>
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
