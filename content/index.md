@@ -10,7 +10,7 @@ Please feel free to reach out to me if you have any questions or just want to ch
 
 ### My Journal
 
-- [Daily goals](/daily-goals)
+- [Goals](/goals)
 - [Vision](/vision)
 
 ### My Notes

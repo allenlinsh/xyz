@@ -24,7 +24,7 @@ document.addEventListener("nav", () => {
               button.style.borderColor = ""
             }, 2000)
           },
-          (error) => console.error(error),
+          error => console.error(error),
         )
       }
       button.addEventListener("click", onClick)

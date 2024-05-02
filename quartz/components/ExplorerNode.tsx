@@ -32,7 +32,10 @@ export type FolderState = {
   collapsed: boolean
 }
 
-function getPathSegment(fp: FilePath | undefined, idx: number): string | undefined {
+function getPathSegment(
+  fp: FilePath | undefined,
+  idx: number,
+): string | undefined {
   if (!fp) {
     return undefined
   }
@@ -48,7 +51,12 @@ export class FileNode {
   file: QuartzPluginData | null
   depth: number
 
-  constructor(slugSegment: string, displayName?: string, file?: QuartzPluginData, depth?: number) {
+  constructor(
+    slugSegment: string,
+    displayName?: string,
+    file?: QuartzPluginData,
+    depth?: number,
+  ) {
     this.children = []
     this.name = slugSegment
     this.displayName = displayName ?? file?.frontmatter?.title ?? slugSegment
@@ -73,7 +81,9 @@ export class FileNode {
         }
       } else {
         // direct child
-        this.children.push(new FileNode(nextSegment, undefined, fileData.file, this.depth + 1))
+        this.children.push(
+          new FileNode(nextSegment, undefined, fileData.file, this.depth + 1),
+        )
       }
 
       return
@@ -81,7 +91,7 @@ export class FileNode {
 
     // find the right child to insert into
     fileData.path = fileData.path.splice(1)
-    const child = this.children.find((c) => c.name === nextSegment)
+    const child = this.children.find(c => c.name === nextSegment)
     if (child) {
       child.insert(fileData)
       return
@@ -108,7 +118,7 @@ export class FileNode {
    */
   filter(filterFn: (node: FileNode) => boolean) {
     this.children = this.children.filter(filterFn)
-    this.children.forEach((child) => child.filter(filterFn))
+    this.children.forEach(child => child.filter(filterFn))
   }
 
   /**
@@ -117,7 +127,7 @@ export class FileNode {
    */
   map(mapFn: (node: FileNode) => void) {
     mapFn(this)
-    this.children.forEach((child) => child.map(mapFn))
+    this.children.forEach(child => child.map(mapFn))
   }
 
   /**
@@ -136,7 +146,7 @@ export class FileNode {
           folderPaths.push({ path: folderPath, collapsed })
         }
 
-        node.children.forEach((child) => traverse(child, folderPath))
+        node.children.forEach(child => traverse(child, folderPath))
       }
     }
 
@@ -151,7 +161,7 @@ export class FileNode {
    */
   sort(sortFn: (a: FileNode, b: FileNode) => number) {
     this.children = this.children.sort(sortFn)
-    this.children.forEach((e) => e.sort(sortFn))
+    this.children.forEach(e => e.sort(sortFn))
   }
 }
 
@@ -162,7 +172,12 @@ type ExplorerNodeProps = {
   fullPath?: string
 }
 
-export function ExplorerNode({ node, opts, fullPath, fileData }: ExplorerNodeProps) {
+export function ExplorerNode({
+  node,
+  opts,
+  fullPath,
+  fileData,
+}: ExplorerNodeProps) {
   // Get options
   const folderBehavior = opts.folderClickBehavior
   const isDefaultOpen = opts.folderDefaultState === "open"
@@ -178,7 +193,10 @@ export function ExplorerNode({ node, opts, fullPath, fileData }: ExplorerNodePro
       {node.file ? (
         // Single file node
         <li key={node.file.slug}>
-          <a href={resolveRelative(fileData.slug!, node.file.slug!)} data-for={node.file.slug}>
+          <a
+            href={resolveRelative(fileData.slug!, node.file.slug!)}
+            data-for={node.file.slug}
+          >
             {node.displayName}
           </a>
         </li>
@@ -206,7 +224,10 @@ export function ExplorerNode({ node, opts, fullPath, fileData }: ExplorerNodePro
               <div key={node.name} data-folderpath={folderPath}>
                 {folderBehavior === "link" ? (
                   <a
-                    href={resolveRelative(fileData.slug!, folderPath as SimpleSlug)}
+                    href={resolveRelative(
+                      fileData.slug!,
+                      folderPath as SimpleSlug,
+                    )}
                     data-for={node.name}
                     class="folder-title"
                   >
@@ -221,7 +242,9 @@ export function ExplorerNode({ node, opts, fullPath, fileData }: ExplorerNodePro
             </div>
           )}
           {/* Recursively render children of folder */}
-          <div class={`folder-outer ${node.depth === 0 || isDefaultOpen ? "open" : ""}`}>
+          <div
+            class={`folder-outer ${node.depth === 0 || isDefaultOpen ? "open" : ""}`}
+          >
             <ul
               // Inline style for left folder paddings
               style={{

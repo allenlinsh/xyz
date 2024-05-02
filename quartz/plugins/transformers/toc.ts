@@ -25,9 +25,9 @@ interface TocEntry {
 }
 
 const slugAnchor = new Slugger()
-export const TableOfContents: QuartzTransformerPlugin<Partial<Options> | undefined> = (
-  userOpts,
-) => {
+export const TableOfContents: QuartzTransformerPlugin<
+  Partial<Options> | undefined
+> = userOpts => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
     name: "TableOfContents",
@@ -35,12 +35,13 @@ export const TableOfContents: QuartzTransformerPlugin<Partial<Options> | undefin
       return [
         () => {
           return async (tree: Root, file) => {
-            const display = file.data.frontmatter?.enableToc ?? opts.showByDefault
+            const display =
+              file.data.frontmatter?.enableToc ?? opts.showByDefault
             if (display) {
               slugAnchor.reset()
               const toc: TocEntry[] = []
               let highestDepth: number = opts.maxDepth
-              visit(tree, "heading", (node) => {
+              visit(tree, "heading", node => {
                 if (node.depth <= opts.maxDepth) {
                   const text = toString(node)
                   highestDepth = Math.min(highestDepth, node.depth)
@@ -53,7 +54,7 @@ export const TableOfContents: QuartzTransformerPlugin<Partial<Options> | undefin
               })
 
               if (toc.length > 0 && toc.length > opts.minEntries) {
-                file.data.toc = toc.map((entry) => ({
+                file.data.toc = toc.map(entry => ({
                   ...entry,
                   depth: entry.depth - highestDepth,
                 }))

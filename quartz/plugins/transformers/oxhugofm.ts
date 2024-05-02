@@ -22,7 +22,10 @@ const defaultOptions: Options = {
   replaceOrgLatex: true,
 }
 
-const relrefRegex = new RegExp(/\[([^\]]+)\]\(\{\{< relref "([^"]+)" >\}\}\)/, "g")
+const relrefRegex = new RegExp(
+  /\[([^\]]+)\]\(\{\{< relref "([^"]+)" >\}\}\)/,
+  "g",
+)
 const predefinedHeadingIdRegex = new RegExp(/(.*) {#(?:.*)}/, "g")
 const hugoShortcodeRegex = new RegExp(/{{(.*)}}/, "g")
 const figureTagRegex = new RegExp(/< ?figure src="(.*)" ?>/, "g")
@@ -47,9 +50,9 @@ const quartzLatexRegex = new RegExp(/\$\$[\s\S]*?\$\$|\$.*?\$/, "g")
  * markdown to make it compatible with quartz but the list of changes applied it
  * is not exhaustive.
  * */
-export const OxHugoFlavouredMarkdown: QuartzTransformerPlugin<Partial<Options> | undefined> = (
-  userOpts,
-) => {
+export const OxHugoFlavouredMarkdown: QuartzTransformerPlugin<
+  Partial<Options> | undefined
+> = userOpts => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
     name: "OxHugoFlavouredMarkdown",
@@ -98,7 +101,7 @@ export const OxHugoFlavouredMarkdown: QuartzTransformerPlugin<Partial<Options> |
         })
 
         // ox-hugo escapes _ as \_
-        src = src.replaceAll(quartzLatexRegex, (value) => {
+        src = src.replaceAll(quartzLatexRegex, value => {
           return value.replaceAll("\\_", "_")
         })
       }

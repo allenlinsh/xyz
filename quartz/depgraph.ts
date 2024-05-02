@@ -25,7 +25,7 @@ export default class DepGraph<T> {
 
   get edges(): [T, T][] {
     let edges: [T, T][] = []
-    this.forEachEdge((edge) => edges.push(edge))
+    this.forEachEdge(edge => edges.push(edge))
     return edges
   }
 
@@ -123,7 +123,7 @@ export default class DepGraph<T> {
     this.addNode(node)
 
     // Add edge if it is present in other
-    other.forEachInNeighbor(node, (neighbor) => {
+    other.forEachInNeighbor(node, neighbor => {
       this.addEdge(neighbor, node)
     })
 
@@ -140,13 +140,13 @@ export default class DepGraph<T> {
   removeOrphanNodes(): Set<T> {
     let orphanNodes = new Set<T>()
 
-    this.forEachNode((node) => {
+    this.forEachNode(node => {
       if (this.inDegree(node) === 0 && this.outDegree(node) === 0) {
         orphanNodes.add(node)
       }
     })
 
-    orphanNodes.forEach((node) => {
+    orphanNodes.forEach(node => {
       this.removeNode(node)
     })
 
@@ -178,7 +178,7 @@ export default class DepGraph<T> {
       }
 
       // Add all unvisited neighbors to the stack
-      this.forEachOutNeighbor(node, (neighbor) => {
+      this.forEachOutNeighbor(node, neighbor => {
         if (!visited.has(neighbor)) {
           stack.push(neighbor)
         }
@@ -198,7 +198,7 @@ export default class DepGraph<T> {
     let upstreamNodes = new Set<T>()
 
     // Backwards DFS for each leaf node
-    leafNodes.forEach((leafNode) => {
+    leafNodes.forEach(leafNode => {
       let stack: T[] = [leafNode]
 
       while (stack.length > 0) {
@@ -215,7 +215,7 @@ export default class DepGraph<T> {
         }
 
         // Add all unvisited parents to the stack
-        this.forEachInNeighbor(node, (parentNode) => {
+        this.forEachInNeighbor(node, parentNode => {
           if (!visited.has(parentNode)) {
             stack.push(parentNode)
           }

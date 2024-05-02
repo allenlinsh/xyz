@@ -8,10 +8,10 @@ Here's my daily routine:
 
 _Morning_
 
-- `7:00 AM`: Wake up, get out of bed, and walk straight into cold shower.
+- `7:00 AM`: Wake up, get out of bed, drink a glass of water, and walk straight into cold shower.
 - `7:05 AM`: Brush my teeth, make my bed, and meditate for 5 minutes.
-- `7:10 AM`: On a paper notebook:
-  - Write down what I'm grateful for
+- `7:10 AM`: On a paper notebook, write down:
+  - What I'm grateful for
   - What I want to achieve today
   - What I'm going to do to achieve it
 - `7:15 AM`: Go for a morning walk or run under direct sunlight for 15 minutes.

@@ -27,9 +27,9 @@ function coerceDate(fp: string, d: any): Date {
 }
 
 type MaybeDate = undefined | string | number
-export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | undefined> = (
-  userOpts,
-) => {
+export const CreatedModifiedDate: QuartzTransformerPlugin<
+  Partial<Options> | undefined
+> = userOpts => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
     name: "CreatedModifiedDate",
@@ -43,7 +43,9 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
             let published: MaybeDate = undefined
 
             const fp = file.data.filePath!
-            const fullFp = path.isAbsolute(fp) ? fp : path.posix.join(file.cwd, fp)
+            const fullFp = path.isAbsolute(fp)
+              ? fp
+              : path.posix.join(file.cwd, fp)
             for (const source of opts.priority) {
               if (source === "filesystem") {
                 const st = await fs.promises.stat(fullFp)
@@ -64,7 +66,9 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
                 }
 
                 try {
-                  modified ||= await repo.getFileLatestModifiedDateAsync(file.data.filePath!)
+                  modified ||= await repo.getFileLatestModifiedDateAsync(
+                    file.data.filePath!,
+                  )
                 } catch {
                   console.log(
                     chalk.yellow(

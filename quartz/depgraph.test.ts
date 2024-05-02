@@ -20,10 +20,22 @@ describe("DepGraph", () => {
       graph.addEdge("A", "B")
       graph.addEdge("B", "C")
       graph.addEdge("D", "B")
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("A"), new Set(["A", "B", "D"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("B"), new Set(["A", "B", "D"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("C"), new Set(["A", "B", "D"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("D"), new Set(["A", "B", "D"]))
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("A"),
+        new Set(["A", "B", "D"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("B"),
+        new Set(["A", "B", "D"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("C"),
+        new Set(["A", "B", "D"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("D"),
+        new Set(["A", "B", "D"]),
+      )
     })
 
     test("gets correct ancestors in a graph with cycles", () => {
@@ -32,10 +44,22 @@ describe("DepGraph", () => {
       graph.addEdge("B", "C")
       graph.addEdge("C", "A")
       graph.addEdge("C", "D")
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("A"), new Set(["A", "B", "C"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("B"), new Set(["A", "B", "C"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("C"), new Set(["A", "B", "C"]))
-      assert.deepStrictEqual(graph.getLeafNodeAncestors("D"), new Set(["A", "B", "C"]))
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("A"),
+        new Set(["A", "B", "C"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("B"),
+        new Set(["A", "B", "C"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("C"),
+        new Set(["A", "B", "C"]),
+      )
+      assert.deepStrictEqual(
+        graph.getLeafNodeAncestors("D"),
+        new Set(["A", "B", "C"]),
+      )
     })
   })
 

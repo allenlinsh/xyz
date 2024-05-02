@@ -22,7 +22,7 @@ async function mouseEnterHandler(
   }
 
   const hasAlreadyBeenFetched = () =>
-    [...link.children].some((child) => child.classList.contains("popover"))
+    [...link.children].some(child => child.classList.contains("popover"))
 
   // dont refetch if there's already a popover
   if (hasAlreadyBeenFetched()) {
@@ -37,7 +37,7 @@ async function mouseEnterHandler(
   targetUrl.hash = ""
   targetUrl.search = ""
 
-  const response = await fetch(`${targetUrl}`).catch((err) => {
+  const response = await fetch(`${targetUrl}`).catch(err => {
     console.error(err)
   })
 
@@ -84,7 +84,7 @@ async function mouseEnterHandler(
       const elts = [...html.getElementsByClassName("popover-hint")]
       if (elts.length === 0) return
 
-      elts.forEach((elt) => popoverInner.appendChild(elt))
+      elts.forEach(elt => popoverInner.appendChild(elt))
   }
 
   setPosition(popoverElement)
@@ -100,9 +100,13 @@ async function mouseEnterHandler(
 }
 
 document.addEventListener("nav", () => {
-  const links = [...document.getElementsByClassName("internal")] as HTMLLinkElement[]
+  const links = [
+    ...document.getElementsByClassName("internal"),
+  ] as HTMLLinkElement[]
   for (const link of links) {
     link.addEventListener("mouseenter", mouseEnterHandler)
-    window.addCleanup(() => link.removeEventListener("mouseenter", mouseEnterHandler))
+    window.addCleanup(() =>
+      link.removeEventListener("mouseenter", mouseEnterHandler),
+    )
   }
 })

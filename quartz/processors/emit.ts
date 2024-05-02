@@ -29,5 +29,7 @@ export async function emitContent(ctx: BuildCtx, content: ProcessedContent[]) {
     }
   }
 
-  log.end(`Emitted ${emittedFiles} files to \`${argv.output}\` in ${perf.timeSince()}`)
+  log.end(
+    `Emitted ${emittedFiles} files to \`${argv.output}\` in ${perf.timeSince()}`,
+  )
 }

@@ -13,7 +13,9 @@ All plugins are defined as a function that takes in a single parameter for optio
 
 ```ts
 type OptionType = object | undefined
-type QuartzPlugin<Options extends OptionType = undefined> = (opts?: Options) => QuartzPluginInstance
+type QuartzPlugin<Options extends OptionType = undefined> = (
+  opts?: Options,
+) => QuartzPluginInstance
 type QuartzPluginInstance =
   | QuartzTransformerPluginInstance
   | QuartzFilterPluginInstance
@@ -220,7 +222,11 @@ export type QuartzEmitterPlugin<Options extends OptionType = undefined> = (
 
 export type QuartzEmitterPluginInstance = {
   name: string
-  emit(ctx: BuildCtx, content: ProcessedContent[], resources: StaticResources): Promise<FilePath[]>
+  emit(
+    ctx: BuildCtx,
+    content: ProcessedContent[],
+    resources: StaticResources,
+  ): Promise<FilePath[]>
   getQuartzComponents(ctx: BuildCtx): QuartzComponent[]
 }
 ```
@@ -264,12 +270,20 @@ export const ContentPage: QuartzEmitterPlugin = () => {
   return {
     name: "ContentPage",
     getQuartzComponents() {
-      return [head, ...header, ...beforeBody, pageBody, ...left, ...right, footer]
+      return [
+        head,
+        ...header,
+        ...beforeBody,
+        pageBody,
+        ...left,
+        ...right,
+        footer,
+      ]
     },
     async emit(ctx, content, resources, emit): Promise<FilePath[]> {
       const cfg = ctx.cfg.configuration
       const fps: FilePath[] = []
-      const allFiles = content.map((c) => c[1].data)
+      const allFiles = content.map(c => c[1].data)
       for (const [tree, file] of content) {
         const slug = canonicalizeServer(file.data.slug!)
         const externalResources = pageResources(slug, resources)
@@ -282,7 +296,13 @@ export const ContentPage: QuartzEmitterPlugin = () => {
           allFiles,
         }
 
-        const content = renderPage(cfg, slug, componentData, opts, externalResources)
+        const content = renderPage(
+          cfg,
+          slug,
+          componentData,
+          opts,
+          externalResources,
+        )
         const fp = await emit({
           content,
           slug: file.data.slug!,

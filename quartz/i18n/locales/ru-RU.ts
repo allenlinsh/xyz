@@ -76,15 +76,22 @@ export default {
     tagContent: {
       tag: "Тег",
       tagIndex: "Индекс тегов",
-      itemsUnderTag: ({ count }) => `с этим тегом ${count} элемент${getForm(count, "", "а", "ов")}`,
+      itemsUnderTag: ({ count }) =>
+        `с этим тегом ${count} элемент${getForm(count, "", "а", "ов")}`,
       showingFirst: ({ count }) =>
         `Показыва${getForm(count, "ется", "ются", "ются")} ${count} тег${getForm(count, "", "а", "ов")}`,
-      totalTags: ({ count }) => `Всего ${count} тег${getForm(count, "", "а", "ов")}`,
+      totalTags: ({ count }) =>
+        `Всего ${count} тег${getForm(count, "", "а", "ов")}`,
     },
   },
 } as const satisfies Translation
 
-function getForm(number: number, form1: string, form2: string, form5: string): string {
+function getForm(
+  number: number,
+  form1: string,
+  form2: string,
+  form5: string,
+): string {
   const remainder100 = number % 100
   const remainder10 = remainder100 % 10
 

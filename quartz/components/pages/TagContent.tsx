@@ -1,4 +1,8 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "../types"
 import style from "../styles/listPage.scss"
 import { PageList } from "../PageList"
 import { FullSlug, getAllSegmentPrefixes, simplifySlug } from "../../util/path"
@@ -13,13 +17,17 @@ const TagContent: QuartzComponent = (props: QuartzComponentProps) => {
   const slug = fileData.slug
 
   if (!(slug?.startsWith("tags/") || slug === "tags")) {
-    throw new Error(`Component "TagContent" tried to render a non-tag page: ${slug}`)
+    throw new Error(
+      `Component "TagContent" tried to render a non-tag page: ${slug}`,
+    )
   }
 
   const tag = simplifySlug(slug.slice("tags/".length) as FullSlug)
   const allPagesWithTag = (tag: string) =>
-    allFiles.filter((file) =>
-      (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(tag),
+    allFiles.filter(file =>
+      (file.frontmatter?.tags ?? [])
+        .flatMap(getAllSegmentPrefixes)
+        .includes(tag),
     )
 
   const content =
@@ -31,7 +39,9 @@ const TagContent: QuartzComponent = (props: QuartzComponentProps) => {
   if (tag === "/") {
     const tags = [
       ...new Set(
-        allFiles.flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes),
+        allFiles
+          .flatMap(data => data.frontmatter?.tags ?? [])
+          .flatMap(getAllSegmentPrefixes),
       ),
     ].sort((a, b) => a.localeCompare(b))
     const tagItemMap: Map<string, QuartzPluginData[]> = new Map()
@@ -43,16 +53,20 @@ const TagContent: QuartzComponent = (props: QuartzComponentProps) => {
         <article>
           <p>{content}</p>
         </article>
-        <p>{i18n(cfg.locale).pages.tagContent.totalTags({ count: tags.length })}</p>
+        <p>
+          {i18n(cfg.locale).pages.tagContent.totalTags({ count: tags.length })}
+        </p>
         <div>
-          {tags.map((tag) => {
+          {tags.map(tag => {
             const pages = tagItemMap.get(tag)!
             const listProps = {
               ...props,
               allFiles: pages,
             }
 
-            const contentPage = allFiles.filter((file) => file.slug === `tags/${tag}`).at(0)
+            const contentPage = allFiles
+              .filter(file => file.slug === `tags/${tag}`)
+              .at(0)
 
             const root = contentPage?.htmlAst
             const content =
@@ -70,12 +84,16 @@ const TagContent: QuartzComponent = (props: QuartzComponentProps) => {
                 {content && <p>{content}</p>}
                 <div class="page-listing">
                   <p>
-                    {i18n(cfg.locale).pages.tagContent.itemsUnderTag({ count: pages.length })}
+                    {i18n(cfg.locale).pages.tagContent.itemsUnderTag({
+                      count: pages.length,
+                    })}
                     {pages.length > numPages && (
                       <>
                         {" "}
                         <span>
-                          {i18n(cfg.locale).pages.tagContent.showingFirst({ count: numPages })}
+                          {i18n(cfg.locale).pages.tagContent.showingFirst({
+                            count: numPages,
+                          })}
                         </span>
                       </>
                     )}
@@ -99,7 +117,11 @@ const TagContent: QuartzComponent = (props: QuartzComponentProps) => {
       <div class={classes}>
         <article>{content}</article>
         <div class="page-listing">
-          <p>{i18n(cfg.locale).pages.tagContent.itemsUnderTag({ count: pages.length })}</p>
+          <p>
+            {i18n(cfg.locale).pages.tagContent.itemsUnderTag({
+              count: pages.length,
+            })}
+          </p>
           <div>
             <PageList {...listProps} />
           </div>

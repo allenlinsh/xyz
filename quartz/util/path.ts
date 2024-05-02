@@ -31,7 +31,12 @@ export type SimpleSlug = SlugLike<"simple">
 export function isSimpleSlug(s: string): s is SimpleSlug {
   const validStart = !(s.startsWith(".") || (s.length > 1 && s.startsWith("/")))
   const validEnding = !endsWith(s, "index")
-  return validStart && !containsForbiddenCharacters(s) && validEnding && !_hasFileExtension(s)
+  return (
+    validStart &&
+    !containsForbiddenCharacters(s) &&
+    validEnding &&
+    !_hasFileExtension(s)
+  )
 }
 
 /** Can be found on `href`s but can also be constructed for client-side navigation (e.g. search and graph) */
@@ -39,7 +44,11 @@ export type RelativeURL = SlugLike<"relative">
 export function isRelativeURL(s: string): s is RelativeURL {
   const validStart = /^\.{1,2}/.test(s)
   const validEnding = !endsWith(s, "index")
-  return validStart && validEnding && ![".md", ".html"].includes(_getFileExtension(s) ?? "")
+  return (
+    validStart &&
+    validEnding &&
+    ![".md", ".html"].includes(_getFileExtension(s) ?? "")
+  )
 }
 
 export function getFullSlug(window: Window): FullSlug {
@@ -50,7 +59,7 @@ export function getFullSlug(window: Window): FullSlug {
 function sluggify(s: string): string {
   return s
     .split("/")
-    .map((segment) =>
+    .map(segment =>
       segment
         .replace(/\s/g, "-")
         .replace(/&/g, "-and-")
@@ -89,9 +98,11 @@ export function transformInternalLink(link: string): RelativeURL {
   let [fplike, anchor] = splitAnchor(decodeURI(link))
 
   const folderPath = isFolderPath(fplike)
-  let segments = fplike.split("/").filter((x) => x.length > 0)
+  let segments = fplike.split("/").filter(x => x.length > 0)
   let prefix = segments.filter(isRelativeSegment).join("/")
-  let fp = segments.filter((seg) => !isRelativeSegment(seg) && seg !== "").join("/")
+  let fp = segments
+    .filter(seg => !isRelativeSegment(seg) && seg !== "")
+    .join("/")
 
   // manually add ext here as we want to not strip 'index' if it has an extension
   const simpleSlug = simplifySlug(slugifyFilePath(fp as FilePath))
@@ -103,15 +114,22 @@ export function transformInternalLink(link: string): RelativeURL {
 
 // from micromorph/src/utils.ts
 // https://github.com/natemoo-re/micromorph/blob/main/src/utils.ts#L5
-const _rebaseHtmlElement = (el: Element, attr: string, newBase: string | URL) => {
+const _rebaseHtmlElement = (
+  el: Element,
+  attr: string,
+  newBase: string | URL,
+) => {
   const rebased = new URL(el.getAttribute(attr)!, newBase)
   el.setAttribute(attr, rebased.pathname + rebased.hash)
 }
-export function normalizeRelativeURLs(el: Element | Document, destination: string | URL) {
-  el.querySelectorAll('[href^="./"], [href^="../"]').forEach((item) =>
+export function normalizeRelativeURLs(
+  el: Element | Document,
+  destination: string | URL,
+) {
+  el.querySelectorAll('[href^="./"], [href^="../"]').forEach(item =>
     _rebaseHtmlElement(item, "href", destination),
   )
-  el.querySelectorAll('[src^="./"], [src^="../"]').forEach((item) =>
+  el.querySelectorAll('[src^="./"], [src^="../"]').forEach(item =>
     _rebaseHtmlElement(item, "src", destination),
   )
 }
@@ -127,17 +145,25 @@ const _rebaseHastElement = (
       return
     }
 
-    const rel = joinSegments(resolveRelative(curBase, newBase), "..", el.properties[attr] as string)
+    const rel = joinSegments(
+      resolveRelative(curBase, newBase),
+      "..",
+      el.properties[attr] as string,
+    )
     el.properties[attr] = rel
   }
 }
 
-export function normalizeHastElement(rawEl: HastElement, curBase: FullSlug, newBase: FullSlug) {
+export function normalizeHastElement(
+  rawEl: HastElement,
+  curBase: FullSlug,
+  newBase: FullSlug,
+) {
   const el = clone(rawEl) // clone so we dont modify the original page
   _rebaseHastElement(el, "src", curBase, newBase)
   _rebaseHastElement(el, "href", curBase, newBase)
   if (el.children) {
-    el.children = el.children.map((child) =>
+    el.children = el.children.map(child =>
       normalizeHastElement(child as HastElement, curBase, newBase),
     )
   }
@@ -149,9 +175,9 @@ export function normalizeHastElement(rawEl: HastElement, curBase: FullSlug, newB
 export function pathToRoot(slug: FullSlug): RelativeURL {
   let rootPath = slug
     .split("/")
-    .filter((x) => x !== "")
+    .filter(x => x !== "")
     .slice(0, -1)
-    .map((_) => "..")
+    .map(_ => "..")
     .join("/")
 
   if (rootPath.length === 0) {
@@ -161,8 +187,14 @@ export function pathToRoot(slug: FullSlug): RelativeURL {
   return rootPath as RelativeURL
 }
 
-export function resolveRelative(current: FullSlug, target: FullSlug | SimpleSlug): RelativeURL {
-  const res = joinSegments(pathToRoot(current), simplifySlug(target as FullSlug)) as RelativeURL
+export function resolveRelative(
+  current: FullSlug,
+  target: FullSlug | SimpleSlug,
+): RelativeURL {
+  const res = joinSegments(
+    pathToRoot(current),
+    simplifySlug(target as FullSlug),
+  ) as RelativeURL
   return res
 }
 
@@ -178,13 +210,13 @@ export function splitAnchor(link: string): [string, string] {
 export function slugTag(tag: string) {
   return tag
     .split("/")
-    .map((tagSegment) => sluggify(tagSegment))
+    .map(tagSegment => sluggify(tagSegment))
     .join("/")
 }
 
 export function joinSegments(...args: string[]): string {
   return args
-    .filter((segment) => segment !== "")
+    .filter(segment => segment !== "")
     .join("/")
     .replace(/\/\/+/g, "/")
 }
@@ -203,7 +235,11 @@ export interface TransformOptions {
   allSlugs: FullSlug[]
 }
 
-export function transformLink(src: FullSlug, target: string, opts: TransformOptions): RelativeURL {
+export function transformLink(
+  src: FullSlug,
+  target: string,
+  opts: TransformOptions,
+): RelativeURL {
   let targetSlug = transformInternalLink(target)
 
   if (opts.strategy === "relative") {
@@ -215,7 +251,7 @@ export function transformLink(src: FullSlug, target: string, opts: TransformOpti
 
     if (opts.strategy === "shortest") {
       // if the file name is unique, then it's just the filename
-      const matchingFileNames = opts.allSlugs.filter((slug) => {
+      const matchingFileNames = opts.allSlugs.filter(slug => {
         const parts = slug.split("/")
         const fileName = parts.at(-1)
         return targetCanonical === fileName
@@ -229,7 +265,8 @@ export function transformLink(src: FullSlug, target: string, opts: TransformOpti
     }
 
     // if it's not unique, then it's the absolute path from the vault root
-    return (joinSegments(pathToRoot(src), canonicalSlug) + folderTail) as RelativeURL
+    return (joinSegments(pathToRoot(src), canonicalSlug) +
+      folderTail) as RelativeURL
   }
 }
 
@@ -255,7 +292,9 @@ function trimSuffix(s: string, suffix: string): string {
 }
 
 function containsForbiddenCharacters(s: string): boolean {
-  return s.includes(" ") || s.includes("#") || s.includes("?") || s.includes("&")
+  return (
+    s.includes(" ") || s.includes("#") || s.includes("?") || s.includes("&")
+  )
 }
 
 function _hasFileExtension(s: string): boolean {

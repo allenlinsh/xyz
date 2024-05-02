@@ -18,7 +18,9 @@ const urlRegex = new RegExp(
   "g",
 )
 
-export const Description: QuartzTransformerPlugin<Partial<Options> | undefined> = (userOpts) => {
+export const Description: QuartzTransformerPlugin<
+  Partial<Options> | undefined
+> = userOpts => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
     name: "Description",
@@ -58,7 +60,9 @@ export const Description: QuartzTransformerPlugin<Partial<Options> | undefined> 
               while (currentDescriptionLength < len) {
                 const sentence = sentences[sentenceIdx]
                 if (!sentence) break
-                const currentSentence = sentence.endsWith(".") ? sentence : sentence + "."
+                const currentSentence = sentence.endsWith(".")
+                  ? sentence
+                  : sentence + "."
                 finalDesc.push(currentSentence)
                 currentDescriptionLength += currentSentence.length
                 sentenceIdx++

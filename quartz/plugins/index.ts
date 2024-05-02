@@ -9,7 +9,9 @@ export function getStaticResourcesFromPlugins(ctx: BuildCtx) {
   }
 
   for (const transformer of ctx.cfg.plugins.transformers) {
-    const res = transformer.externalResources ? transformer.externalResources(ctx) : {}
+    const res = transformer.externalResources
+      ? transformer.externalResources(ctx)
+      : {}
     if (res?.js) {
       staticResources.js.push(...res.js)
     }

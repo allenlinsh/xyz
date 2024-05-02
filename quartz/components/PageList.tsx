@@ -29,7 +29,12 @@ type Props = {
   limit?: number
 } & QuartzComponentProps
 
-export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit }: Props) => {
+export const PageList: QuartzComponent = ({
+  cfg,
+  fileData,
+  allFiles,
+  limit,
+}: Props) => {
   let list = allFiles.sort(byDateAndAlphabetical(cfg))
   if (limit) {
     list = list.slice(0, limit)
@@ -37,7 +42,7 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit }: Pr
 
   return (
     <ul class="section-ul">
-      {list.map((page) => {
+      {list.map(page => {
         const title = page.frontmatter?.title
         const tags = page.frontmatter?.tags ?? []
 
@@ -51,17 +56,23 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit }: Pr
               )}
               <div class="desc">
                 <h3>
-                  <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
+                  <a
+                    href={resolveRelative(fileData.slug!, page.slug!)}
+                    class="internal"
+                  >
                     {title}
                   </a>
                 </h3>
               </div>
               <ul class="tags">
-                {tags.map((tag) => (
+                {tags.map(tag => (
                   <li>
                     <a
                       class="internal tag-link"
-                      href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
+                      href={resolveRelative(
+                        fileData.slug!,
+                        `tags/${tag}` as FullSlug,
+                      )}
                     >
                       {tag}
                     </a>

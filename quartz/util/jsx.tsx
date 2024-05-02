@@ -5,7 +5,7 @@ import { trace } from "./trace"
 import { type FilePath } from "./path"
 
 const customComponents: Components = {
-  table: (props) => (
+  table: props => (
     <div class="table-container">
       <table {...props} />
     </div>

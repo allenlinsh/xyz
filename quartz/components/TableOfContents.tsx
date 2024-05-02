@@ -1,4 +1,8 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "./types"
 import legacyStyle from "./styles/legacyToc.scss"
 import modernStyle from "./styles/toc.scss"
 import { classNames } from "../util/lang"
@@ -26,7 +30,11 @@ const TableOfContents: QuartzComponent = ({
 
   return (
     <div class={classNames(displayClass, "toc")}>
-      <button type="button" id="toc" class={fileData.collapseToc ? "collapsed" : ""}>
+      <button
+        type="button"
+        id="toc"
+        class={fileData.collapseToc ? "collapsed" : ""}
+      >
         <h3>{i18n(cfg.locale).components.tableOfContents.title}</h3>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +53,7 @@ const TableOfContents: QuartzComponent = ({
       </button>
       <div id="toc-content">
         <ul class="overflow">
-          {fileData.toc.map((tocEntry) => (
+          {fileData.toc.map(tocEntry => (
             <li key={tocEntry.slug} class={`depth-${tocEntry.depth}`}>
               <a href={`#${tocEntry.slug}`} data-for={tocEntry.slug}>
                 {tocEntry.text}
@@ -60,7 +68,10 @@ const TableOfContents: QuartzComponent = ({
 TableOfContents.css = modernStyle
 TableOfContents.afterDOMLoaded = script
 
-const LegacyTableOfContents: QuartzComponent = ({ fileData, cfg }: QuartzComponentProps) => {
+const LegacyTableOfContents: QuartzComponent = ({
+  fileData,
+  cfg,
+}: QuartzComponentProps) => {
   if (!fileData.toc) {
     return null
   }
@@ -70,7 +81,7 @@ const LegacyTableOfContents: QuartzComponent = ({ fileData, cfg }: QuartzCompone
         <h3>{i18n(cfg.locale).components.tableOfContents.title}</h3>
       </summary>
       <ul>
-        {fileData.toc.map((tocEntry) => (
+        {fileData.toc.map(tocEntry => (
           <li key={tocEntry.slug} class={`depth-${tocEntry.depth}`}>
             <a href={`#${tocEntry.slug}`} data-for={tocEntry.slug}>
               {tocEntry.text}

@@ -15,26 +15,41 @@ yargs(hideBin(process.argv))
   .scriptName("quartz")
   .version(version)
   .usage("$0 <cmd> [args]")
-  .command("create", "Initialize Quartz", CreateArgv, async (argv) => {
+  .command("create", "Initialize Quartz", CreateArgv, async argv => {
     await handleCreate(argv)
   })
-  .command("update", "Get the latest Quartz updates", CommonArgv, async (argv) => {
-    await handleUpdate(argv)
-  })
+  .command(
+    "update",
+    "Get the latest Quartz updates",
+    CommonArgv,
+    async argv => {
+      await handleUpdate(argv)
+    },
+  )
   .command(
     "restore",
     "Try to restore your content folder from the cache",
     CommonArgv,
-    async (argv) => {
+    async argv => {
       await handleRestore(argv)
     },
   )
-  .command("sync", "Sync your Quartz to and from GitHub.", SyncArgv, async (argv) => {
-    await handleSync(argv)
-  })
-  .command("build", "Build Quartz into a bundle of static HTML files", BuildArgv, async (argv) => {
-    await handleBuild(argv)
-  })
+  .command(
+    "sync",
+    "Sync your Quartz to and from GitHub.",
+    SyncArgv,
+    async argv => {
+      await handleSync(argv)
+    },
+  )
+  .command(
+    "build",
+    "Build Quartz into a bundle of static HTML files",
+    BuildArgv,
+    async argv => {
+      await handleBuild(argv)
+    },
+  )
   .showHelpOnFail(false)
   .help()
   .strict()

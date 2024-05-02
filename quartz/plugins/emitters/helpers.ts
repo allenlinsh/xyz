@@ -10,7 +10,12 @@ type WriteOptions = {
   content: string | Buffer
 }
 
-export const write = async ({ ctx, slug, ext, content }: WriteOptions): Promise<FilePath> => {
+export const write = async ({
+  ctx,
+  slug,
+  ext,
+  content,
+}: WriteOptions): Promise<FilePath> => {
   const pathToPage = joinSegments(ctx.argv.output, slug + ext) as FilePath
   const dir = path.dirname(pathToPage)
   await fs.promises.mkdir(dir, { recursive: true })

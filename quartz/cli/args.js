@@ -94,7 +94,8 @@ export const BuildArgv = {
   remoteDevHost: {
     string: true,
     default: "",
-    describe: "A URL override for the websocket connection if you are not developing on localhost",
+    describe:
+      "A URL override for the websocket connection if you are not developing on localhost",
   },
   bundleInfo: {
     boolean: true,

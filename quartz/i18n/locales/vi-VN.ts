@@ -69,7 +69,9 @@ export default {
     folderContent: {
       folder: "Thư Mục",
       itemsUnderFolder: ({ count }) =>
-        count === 1 ? "1 mục trong thư mục này." : `${count} mục trong thư mục này.`,
+        count === 1
+          ? "1 mục trong thư mục này."
+          : `${count} mục trong thư mục này.`,
     },
     tagContent: {
       tag: "Thẻ",

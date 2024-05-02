@@ -1,5 +1,10 @@
 import micromorph from "micromorph"
-import { FullSlug, RelativeURL, getFullSlug, normalizeRelativeURLs } from "../../util/path"
+import {
+  FullSlug,
+  RelativeURL,
+  getFullSlug,
+  normalizeRelativeURLs,
+} from "../../util/path"
 
 // adapted from `micromorph`
 // https://github.com/natemoo-re/micromorph
@@ -23,7 +28,9 @@ const isSamePage = (url: URL): boolean => {
   return sameOrigin && samePath
 }
 
-const getOpts = ({ target }: Event): { url: URL; scroll?: boolean } | undefined => {
+const getOpts = ({
+  target,
+}: Event): { url: URL; scroll?: boolean } | undefined => {
   if (!isElement(target)) return
   if (target.attributes.getNamedItem("target")?.value === "_blank") return
   const a = target.closest("a")
@@ -31,22 +38,27 @@ const getOpts = ({ target }: Event): { url: URL; scroll?: boolean } | undefined 
   if ("routerIgnore" in a.dataset) return
   const { href } = a
   if (!isLocalUrl(href)) return
-  return { url: new URL(href), scroll: "routerNoscroll" in a.dataset ? false : undefined }
+  return {
+    url: new URL(href),
+    scroll: "routerNoscroll" in a.dataset ? false : undefined,
+  }
 }
 
 function notifyNav(url: FullSlug) {
-  const event: CustomEventMap["nav"] = new CustomEvent("nav", { detail: { url } })
+  const event: CustomEventMap["nav"] = new CustomEvent("nav", {
+    detail: { url },
+  })
   document.dispatchEvent(event)
 }
 
 const cleanupFns: Set<(...args: any[]) => void> = new Set()
-window.addCleanup = (fn) => cleanupFns.add(fn)
+window.addCleanup = fn => cleanupFns.add(fn)
 
 let p: DOMParser
 async function navigate(url: URL, isBack: boolean = false) {
   p = p || new DOMParser()
   const contents = await fetch(`${url}`)
-    .then((res) => {
+    .then(res => {
       const contentType = res.headers.get("content-type")
       if (contentType?.startsWith("text/html")) {
         return res.text()
@@ -61,7 +73,7 @@ async function navigate(url: URL, isBack: boolean = false) {
   if (!contents) return
 
   // cleanup old
-  cleanupFns.forEach((fn) => fn())
+  cleanupFns.forEach(fn => fn())
   cleanupFns.clear()
 
   const html = p.parseFromString(contents, "text/html")
@@ -86,7 +98,9 @@ async function navigate(url: URL, isBack: boolean = false) {
   // scroll into place and add history
   if (!isBack) {
     if (url.hash) {
-      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+      const el = document.getElementById(
+        decodeURIComponent(url.hash.substring(1)),
+      )
       el?.scrollIntoView()
     } else {
       window.scrollTo({ top: 0 })
@@ -94,10 +108,12 @@ async function navigate(url: URL, isBack: boolean = false) {
   }
 
   // now, patch head
-  const elementsToRemove = document.head.querySelectorAll(":not([spa-preserve])")
-  elementsToRemove.forEach((el) => el.remove())
+  const elementsToRemove = document.head.querySelectorAll(
+    ":not([spa-preserve])",
+  )
+  elementsToRemove.forEach(el => el.remove())
   const elementsToAdd = html.head.querySelectorAll(":not([spa-preserve])")
-  elementsToAdd.forEach((el) => document.head.appendChild(el))
+  elementsToAdd.forEach(el => document.head.appendChild(el))
 
   // delay setting the url until now
   // at this point everything is loaded so changing the url should resolve to the correct addresses
@@ -112,14 +128,16 @@ window.spaNavigate = navigate
 
 function createRouter() {
   if (typeof window !== "undefined") {
-    window.addEventListener("click", async (event) => {
+    window.addEventListener("click", async event => {
       const { url } = getOpts(event) ?? {}
       // dont hijack behaviour, just let browser act normally
       if (!url || event.ctrlKey || event.metaKey) return
       event.preventDefault()
 
       if (isSamePage(url) && url.hash) {
-        const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+        const el = document.getElementById(
+          decodeURIComponent(url.hash.substring(1)),
+        )
         el?.scrollIntoView()
         history.pushState({}, "", url)
         return
@@ -132,9 +150,10 @@ function createRouter() {
       }
     })
 
-    window.addEventListener("popstate", (event) => {
+    window.addEventListener("popstate", event => {
       const { url } = getOpts(event) ?? {}
-      if (window.location.hash && window.location.pathname === url?.pathname) return
+      if (window.location.hash && window.location.pathname === url?.pathname)
+        return
       try {
         navigate(new URL(window.location.toString()), true)
       } catch (e) {

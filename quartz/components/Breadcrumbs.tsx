@@ -1,6 +1,15 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "./types"
 import breadcrumbsStyle from "./styles/breadcrumbs.scss"
-import { FullSlug, SimpleSlug, joinSegments, resolveRelative } from "../util/path"
+import {
+  FullSlug,
+  SimpleSlug,
+  joinSegments,
+  resolveRelative,
+} from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { classNames } from "../util/lang"
 
@@ -40,7 +49,11 @@ const defaultOptions: BreadcrumbOptions = {
   showCurrentPage: true,
 }
 
-function formatCrumb(displayName: string, baseSlug: FullSlug, currentSlug: SimpleSlug): CrumbData {
+function formatCrumb(
+  displayName: string,
+  baseSlug: FullSlug,
+  currentSlug: SimpleSlug,
+): CrumbData {
   return {
     displayName: displayName.replaceAll("-", " "),
     path: resolveRelative(baseSlug, currentSlug),
@@ -65,7 +78,11 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
     }
 
     // Format entry for root element
-    const firstEntry = formatCrumb(options.rootName, fileData.slug!, "/" as SimpleSlug)
+    const firstEntry = formatCrumb(
+      options.rootName,
+      fileData.slug!,
+      "/" as SimpleSlug,
+    )
     const crumbs: CrumbData[] = [firstEntry]
 
     if (!folderIndex && options.resolveFrontmatterTitle) {
@@ -92,7 +109,9 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
         let curPathSegment = slugParts[i]
 
         // Try to resolve frontmatter folder title
-        const currentFile = folderIndex?.get(slugParts.slice(0, i + 1).join("/"))
+        const currentFile = folderIndex?.get(
+          slugParts.slice(0, i + 1).join("/"),
+        )
         if (currentFile) {
           const title = currentFile.frontmatter!.title
           if (title !== "index") {
@@ -123,11 +142,16 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
     }
 
     return (
-      <nav class={classNames(displayClass, "breadcrumb-container")} aria-label="breadcrumbs">
+      <nav
+        class={classNames(displayClass, "breadcrumb-container")}
+        aria-label="breadcrumbs"
+      >
         {crumbs.map((crumb, index) => (
           <div class="breadcrumb-element">
             <a href={crumb.path}>{crumb.displayName}</a>
-            {index !== crumbs.length - 1 && <p>{` ${options.spacerSymbol} `}</p>}
+            {index !== crumbs.length - 1 && (
+              <p>{` ${options.spacerSymbol} `}</p>
+            )}
           </div>
         ))}
       </nav>

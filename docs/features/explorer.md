@@ -145,7 +145,7 @@ Using this example, the display names of all `FileNodes` (folders + files) will 
 
 ```ts title="quartz.layout.ts"
 Component.Explorer({
-  mapFn: (node) => {
+  mapFn: node => {
     node.displayName = node.displayName.toUpperCase()
   },
 })
@@ -157,7 +157,7 @@ Using this example, you can remove elements from your explorer by providing an a
 
 ```ts title="quartz.layout.ts"
 Component.Explorer({
-  filterFn: (node) => {
+  filterFn: node => {
     // set containing names of everything you want to filter out
     const omit = new Set(["authoring content", "tags", "hosting"])
     return !omit.has(node.name.toLowerCase())
@@ -173,7 +173,7 @@ You can access the frontmatter of a file by `node.file?.frontmatter?`. This allo
 
 ```ts title="quartz.layout.ts"
 Component.Explorer({
-  filterFn: (node) => {
+  filterFn: node => {
     // exclude files with the tag "explorerexclude"
     return node.file?.frontmatter?.tags?.includes("explorerexclude") !== true
   },
@@ -198,10 +198,10 @@ Component.Explorer({
 >
 > ```ts title="functions.ts"
 > import { Options } from "./quartz/components/ExplorerNode"
-> export const mapFn: Options["mapFn"] = (node) => {
+> export const mapFn: Options["mapFn"] = node => {
 >   // implement your function here
 > }
-> export const filterFn: Options["filterFn"] = (node) => {
+> export const filterFn: Options["filterFn"] = node => {
 >   // implement your function here
 > }
 > export const sortFn: Options["sortFn"] = (a, b) => {
@@ -226,7 +226,7 @@ To add emoji prefixes (📁 for folders, 📄 for files), you could use a map fu
 
 ```ts title="quartz.layout.ts"
 Component.Explorer({
-  mapFn: (node) => {
+  mapFn: node => {
     // dont change name of root node
     if (node.depth > 0) {
       // set emoji for file/folder

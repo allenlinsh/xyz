@@ -58,7 +58,13 @@ export const NotFoundPage: QuartzEmitterPlugin = () => {
       return [
         await write({
           ctx,
-          content: renderPage(cfg, slug, componentData, opts, externalResources),
+          content: renderPage(
+            cfg,
+            slug,
+            componentData,
+            opts,
+            externalResources,
+          ),
           slug,
           ext: ".html",
         }),

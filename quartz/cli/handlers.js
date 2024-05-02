@@ -93,7 +93,11 @@ export async function handleCreate(argv) {
         message: `Choose how to initialize the content in \`${contentFolder}\``,
         options: [
           { value: "new", label: "Empty Quartz" },
-          { value: "copy", label: "Copy an existing folder", hint: "overwrites `content`" },
+          {
+            value: "copy",
+            label: "Copy an existing folder",
+            hint: "overwrites `content`",
+          },
           {
             value: "symlink",
             label: "Symlink an existing folder",
@@ -190,7 +194,9 @@ See the [documentation](https://quartz.jzhao.xyz) for how to get started.
 
   // now, do config changes
   const configFilePath = path.join(cwd, "quartz.config.ts")
-  let configContent = await fs.promises.readFile(configFilePath, { encoding: "utf-8" })
+  let configContent = await fs.promises.readFile(configFilePath, {
+    encoding: "utf-8",
+  })
   configContent = configContent.replace(
     /markdownLinkResolution: '(.+)'/,
     `markdownLinkResolution: '${linkResolutionStrategy}'`,
@@ -239,7 +245,7 @@ export async function handleBuild(argv) {
       {
         name: "inline-script-loader",
         setup(build) {
-          build.onLoad({ filter: /\.inline\.(ts|js)$/ }, async (args) => {
+          build.onLoad({ filter: /\.inline\.(ts|js)$/ }, async args => {
             let text = await promises.readFile(args.path, "utf8")
 
             // remove default exports that we manually inserted
@@ -275,7 +281,7 @@ export async function handleBuild(argv) {
   const buildMutex = new Mutex()
   let lastBuildMs = 0
   let cleanupBuild = null
-  const build = async (clientRefresh) => {
+  const build = async clientRefresh => {
     const buildStart = new Date().getTime()
     lastBuildMs = buildStart
     const release = await buildMutex.acquire()
@@ -286,11 +292,15 @@ export async function handleBuild(argv) {
 
     if (cleanupBuild) {
       await cleanupBuild()
-      console.log(chalk.yellow("Detected a source code change, doing a hard rebuild..."))
+      console.log(
+        chalk.yellow("Detected a source code change, doing a hard rebuild..."),
+      )
     }
 
-    const result = await ctx.rebuild().catch((err) => {
-      console.error(`${chalk.red("Couldn't parse Quartz configuration:")} ${fp}`)
+    const result = await ctx.rebuild().catch(err => {
+      console.error(
+        `${chalk.red("Couldn't parse Quartz configuration:")} ${fp}`,
+      )
       console.log(`Reason: ${chalk.grey(err)}`)
       process.exit(1)
     })
@@ -304,12 +314,16 @@ export async function handleBuild(argv) {
           meta.bytes,
         )})`,
       )
-      console.log(await esbuild.analyzeMetafile(result.metafile, { color: true }))
+      console.log(
+        await esbuild.analyzeMetafile(result.metafile, { color: true }),
+      )
     }
 
     // bypass module cache
     // https://github.com/nodejs/modules/issues/307
-    const { default: buildQuartz } = await import(`../../${cacheFile}?update=${randomUUID()}`)
+    const { default: buildQuartz } = await import(
+      `../../${cacheFile}?update=${randomUUID()}`
+    )
     // ^ this import is relative, so base "cacheFile" path can't be used
 
     cleanupBuild = await buildQuartz(argv, buildMutex, clientRefresh)
@@ -318,7 +332,8 @@ export async function handleBuild(argv) {
 
   if (argv.serve) {
     const connections = []
-    const clientRefresh = () => connections.forEach((conn) => conn.send("rebuild"))
+    const clientRefresh = () =>
+      connections.forEach(conn => conn.send("rebuild"))
 
     if (argv.baseDir !== "" && !argv.baseDir.startsWith("/")) {
       argv.baseDir = "/" + argv.baseDir
@@ -354,17 +369,22 @@ export async function handleBuild(argv) {
         })
         const status = res.statusCode
         const statusString =
-          status >= 200 && status < 300 ? chalk.green(`[${status}]`) : chalk.red(`[${status}]`)
+          status >= 200 && status < 300
+            ? chalk.green(`[${status}]`)
+            : chalk.red(`[${status}]`)
         console.log(statusString + chalk.grey(` ${argv.baseDir}${req.url}`))
         release()
       }
 
-      const redirect = (newFp) => {
+      const redirect = newFp => {
         newFp = argv.baseDir + newFp
         res.writeHead(302, {
           Location: newFp,
         })
-        console.log(chalk.yellow("[302]") + chalk.grey(` ${argv.baseDir}${req.url} -> ${newFp}`))
+        console.log(
+          chalk.yellow("[302]") +
+            chalk.grey(` ${argv.baseDir}${req.url} -> ${newFp}`),
+        )
         res.end()
       }
 
@@ -411,7 +431,7 @@ export async function handleBuild(argv) {
     })
     server.listen(argv.port)
     const wss = new WebSocketServer({ port: argv.wsPort })
-    wss.on("connection", (ws) => connections.push(ws))
+    wss.on("connection", ws => connections.push(ws))
     console.log(
       chalk.cyan(
         `Started a Quartz server listening at http://localhost:${argv.port}${argv.baseDir}`,
@@ -461,7 +481,9 @@ export async function handleUpdate(argv) {
   if (res.status === 0) {
     console.log(chalk.green("Done!"))
   } else {
-    console.log(chalk.red("An error occurred above while installing dependencies."))
+    console.log(
+      chalk.red("An error occurred above while installing dependencies."),
+    )
   }
 }
 
@@ -487,7 +509,11 @@ export async function handleSync(argv) {
     const contentStat = await fs.promises.lstat(contentFolder)
     if (contentStat.isSymbolicLink()) {
       const linkTarg = await fs.promises.readlink(contentFolder)
-      console.log(chalk.yellow("Detected symlink, trying to dereference before committing"))
+      console.log(
+        chalk.yellow(
+          "Detected symlink, trying to dereference before committing",
+        ),
+      )
 
       // stash symlink file
       await stashContentFolder(contentFolder)
@@ -531,11 +557,19 @@ export async function handleSync(argv) {
   await popContentFolder(contentFolder)
   if (argv.push) {
     console.log("Pushing your changes")
-    const res = spawnSync("git", ["push", "-uf", ORIGIN_NAME, QUARTZ_SOURCE_BRANCH], {
-      stdio: "inherit",
-    })
+    const res = spawnSync(
+      "git",
+      ["push", "-uf", ORIGIN_NAME, QUARTZ_SOURCE_BRANCH],
+      {
+        stdio: "inherit",
+      },
+    )
     if (res.status !== 0) {
-      console.log(chalk.red(`An error occurred above while pushing to remote ${ORIGIN_NAME}.`))
+      console.log(
+        chalk.red(
+          `An error occurred above while pushing to remote ${ORIGIN_NAME}.`,
+        ),
+      )
       return
     }
   }

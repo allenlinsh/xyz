@@ -1,4 +1,8 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "./types"
 import explorerStyle from "./styles/explorer.scss"
 
 // @ts-ignore
@@ -13,7 +17,7 @@ const defaultOptions = {
   folderClickBehavior: "collapse",
   folderDefaultState: "collapsed",
   useSavedState: true,
-  mapFn: (node) => {
+  mapFn: node => {
     return node
   },
   sortFn: (a, b) => {
@@ -33,7 +37,7 @@ const defaultOptions = {
       return -1
     }
   },
-  filterFn: (node) => node.name !== "tags",
+  filterFn: node => node.name !== "tags",
   order: ["filter", "map", "sort"],
 } satisfies Options
 
@@ -52,7 +56,7 @@ export default ((userOpts?: Partial<Options>) => {
 
     // Construct tree from allFiles
     fileTree = new FileNode("")
-    allFiles.forEach((file) => fileTree.add(file))
+    allFiles.forEach(file => fileTree.add(file))
 
     // Execute all functions (sort, filter, map) that were provided (if none were provided, only default "sort" is applied)
     if (opts.order) {
@@ -71,7 +75,9 @@ export default ((userOpts?: Partial<Options>) => {
 
     // Get all folders of tree. Initialize with collapsed state
     // Stringify to pass json tree as data attribute ([data-tree])
-    const folders = fileTree.getFolderPaths(opts.folderDefaultState === "collapsed")
+    const folders = fileTree.getFolderPaths(
+      opts.folderDefaultState === "collapsed",
+    )
     jsonTree = JSON.stringify(folders)
   }
 

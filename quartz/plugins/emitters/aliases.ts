@@ -1,4 +1,10 @@
-import { FilePath, FullSlug, joinSegments, resolveRelative, simplifySlug } from "../../util/path"
+import {
+  FilePath,
+  FullSlug,
+  joinSegments,
+  resolveRelative,
+  simplifySlug,
+} from "../../util/path"
 import { QuartzEmitterPlugin } from "../types"
 import path from "path"
 import { write } from "./helpers"
@@ -14,9 +20,14 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
 
     const { argv } = ctx
     for (const [_tree, file] of content) {
-      const dir = path.posix.relative(argv.directory, path.dirname(file.data.filePath!))
+      const dir = path.posix.relative(
+        argv.directory,
+        path.dirname(file.data.filePath!),
+      )
       const aliases = file.data.frontmatter?.aliases ?? []
-      const slugs = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
+      const slugs = aliases.map(
+        alias => path.posix.join(dir, alias) as FullSlug,
+      )
       const permalink = file.data.frontmatter?.permalink
       if (typeof permalink === "string") {
         slugs.push(permalink as FullSlug)
@@ -28,7 +39,10 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
           slug = joinSegments(slug, "index") as FullSlug
         }
 
-        graph.addEdge(file.data.filePath!, joinSegments(argv.output, slug + ".html") as FilePath)
+        graph.addEdge(
+          file.data.filePath!,
+          joinSegments(argv.output, slug + ".html") as FilePath,
+        )
       }
     }
 
@@ -40,9 +54,14 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
 
     for (const [_tree, file] of content) {
       const ogSlug = simplifySlug(file.data.slug!)
-      const dir = path.posix.relative(argv.directory, path.dirname(file.data.filePath!))
+      const dir = path.posix.relative(
+        argv.directory,
+        path.dirname(file.data.filePath!),
+      )
       const aliases = file.data.frontmatter?.aliases ?? []
-      const slugs: FullSlug[] = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
+      const slugs: FullSlug[] = aliases.map(
+        alias => path.posix.join(dir, alias) as FullSlug,
+      )
       const permalink = file.data.frontmatter?.permalink
       if (typeof permalink === "string") {
         slugs.push(permalink as FullSlug)

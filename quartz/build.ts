@@ -50,7 +50,7 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
 
   const pluginCount = Object.values(cfg.plugins).flat().length
   const pluginNames = (key: "transformers" | "filters" | "emitters") =>
-    cfg.plugins[key].map((plugin) => plugin.name)
+    cfg.plugins[key].map(plugin => plugin.name)
   if (argv.verbose) {
     console.log(`Loaded ${pluginCount} plugins`)
     console.log(`  Transformers: ${pluginNames("transformers").join(", ")}`)
@@ -61,17 +61,23 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
   const release = await mut.acquire()
   perf.addEvent("clean")
   await rimraf(path.join(output, "*"), { glob: true })
-  console.log(`Cleaned output directory \`${output}\` in ${perf.timeSince("clean")}`)
+  console.log(
+    `Cleaned output directory \`${output}\` in ${perf.timeSince("clean")}`,
+  )
 
   perf.addEvent("glob")
-  const allFiles = await glob("**/*.*", argv.directory, cfg.configuration.ignorePatterns)
-  const fps = allFiles.filter((fp) => fp.endsWith(".md")).sort()
+  const allFiles = await glob(
+    "**/*.*",
+    argv.directory,
+    cfg.configuration.ignorePatterns,
+  )
+  const fps = allFiles.filter(fp => fp.endsWith(".md")).sort()
   console.log(
     `Found ${fps.length} input files from \`${argv.directory}\` in ${perf.timeSince("glob")}`,
   )
 
-  const filePaths = fps.map((fp) => joinSegments(argv.directory, fp) as FilePath)
-  ctx.allSlugs = allFiles.map((fp) => slugifyFilePath(fp as FilePath))
+  const filePaths = fps.map(fp => joinSegments(argv.directory, fp) as FilePath)
+  ctx.allSlugs = allFiles.map(fp => slugifyFilePath(fp as FilePath))
 
   const parsedFiles = await parseMarkdown(ctx, filePaths)
   const filteredContent = filterContent(ctx, parsedFiles)
@@ -83,12 +89,18 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
     const staticResources = getStaticResourcesFromPlugins(ctx)
     for (const emitter of cfg.plugins.emitters) {
       dependencies[emitter.name] =
-        (await emitter.getDependencyGraph?.(ctx, filteredContent, staticResources)) ?? null
+        (await emitter.getDependencyGraph?.(
+          ctx,
+          filteredContent,
+          staticResources,
+        )) ?? null
     }
   }
 
   await emitContent(ctx, filteredContent)
-  console.log(chalk.green(`Done processing ${fps.length} files in ${perf.timeSince()}`))
+  console.log(
+    chalk.green(`Done processing ${fps.length} files in ${perf.timeSince()}`),
+  )
   release()
 
   if (argv.serve) {
@@ -132,11 +144,13 @@ async function startServing(
     ignoreInitial: true,
   })
 
-  const buildFromEntry = argv.fastRebuild ? partialRebuildFromEntrypoint : rebuildFromEntrypoint
+  const buildFromEntry = argv.fastRebuild
+    ? partialRebuildFromEntrypoint
+    : rebuildFromEntrypoint
   watcher
-    .on("add", (fp) => buildFromEntry(fp, "add", clientRefresh, buildData))
-    .on("change", (fp) => buildFromEntry(fp, "change", clientRefresh, buildData))
-    .on("unlink", (fp) => buildFromEntry(fp, "delete", clientRefresh, buildData))
+    .on("add", fp => buildFromEntry(fp, "add", clientRefresh, buildData))
+    .on("change", fp => buildFromEntry(fp, "change", clientRefresh, buildData))
+    .on("unlink", fp => buildFromEntry(fp, "delete", clientRefresh, buildData))
 
   return async () => {
     await watcher.close()
@@ -178,12 +192,18 @@ async function partialRebuildFromEntrypoint(
     case "add":
       // add to cache when new file is added
       processedFiles = await parseMarkdown(ctx, [fp])
-      processedFiles.forEach(([tree, vfile]) => contentMap.set(vfile.data.filePath!, [tree, vfile]))
+      processedFiles.forEach(([tree, vfile]) =>
+        contentMap.set(vfile.data.filePath!, [tree, vfile]),
+      )
 
       // update the dep graph by asking all emitters whether they depend on this file
       for (const emitter of cfg.plugins.emitters) {
         const emitterGraph =
-          (await emitter.getDependencyGraph?.(ctx, processedFiles, staticResources)) ?? null
+          (await emitter.getDependencyGraph?.(
+            ctx,
+            processedFiles,
+            staticResources,
+          )) ?? null
 
         if (emitterGraph) {
           const existingGraph = dependencies[emitter.name]
@@ -199,20 +219,29 @@ async function partialRebuildFromEntrypoint(
     case "change":
       // invalidate cache when file is changed
       processedFiles = await parseMarkdown(ctx, [fp])
-      processedFiles.forEach(([tree, vfile]) => contentMap.set(vfile.data.filePath!, [tree, vfile]))
+      processedFiles.forEach(([tree, vfile]) =>
+        contentMap.set(vfile.data.filePath!, [tree, vfile]),
+      )
 
       // only content files can have added/removed dependencies because of transclusions
       if (path.extname(fp) === ".md") {
         for (const emitter of cfg.plugins.emitters) {
           // get new dependencies from all emitters for this file
           const emitterGraph =
-            (await emitter.getDependencyGraph?.(ctx, processedFiles, staticResources)) ?? null
+            (await emitter.getDependencyGraph?.(
+              ctx,
+              processedFiles,
+              staticResources,
+            )) ?? null
 
           // only update the graph if the emitter plugin uses the changed file
           // eg. Assets plugin ignores md files, so we skip updating the graph
           if (emitterGraph?.hasNode(fp)) {
             // merge the new dependencies into the dep graph
-            dependencies[emitter.name]?.updateIncomingEdgesForNode(emitterGraph, fp)
+            dependencies[emitter.name]?.updateIncomingEdgesForNode(
+              emitterGraph,
+              fp,
+            )
           }
         }
       }
@@ -270,12 +299,16 @@ async function partialRebuildFromEntrypoint(
 
       const upstreamContent = upstreams
         // filter out non-markdown files
-        .filter((file) => contentMap.has(file))
+        .filter(file => contentMap.has(file))
         // if file was deleted, don't give it to the emitter
-        .filter((file) => !toRemove.has(file))
-        .map((file) => contentMap.get(file)!)
+        .filter(file => !toRemove.has(file))
+        .map(file => contentMap.get(file)!)
 
-      const emittedFps = await emitter.emit(ctx, upstreamContent, staticResources)
+      const emittedFps = await emitter.emit(
+        ctx,
+        upstreamContent,
+        staticResources,
+      )
 
       if (ctx.argv.verbose) {
         for (const file of emittedFps) {
@@ -287,19 +320,21 @@ async function partialRebuildFromEntrypoint(
     }
   }
 
-  console.log(`Emitted ${emittedFiles} files to \`${argv.output}\` in ${perf.timeSince("rebuild")}`)
+  console.log(
+    `Emitted ${emittedFiles} files to \`${argv.output}\` in ${perf.timeSince("rebuild")}`,
+  )
 
   // CLEANUP
   const destinationsToDelete = new Set<FilePath>()
   for (const file of toRemove) {
     // remove from cache
     contentMap.delete(file)
-    Object.values(dependencies).forEach((depGraph) => {
+    Object.values(dependencies).forEach(depGraph => {
       // remove the node from dependency graphs
       depGraph?.removeNode(file)
       // remove any orphan nodes. eg if a.md is deleted, a.html is orphaned and should be removed
       const orphanNodes = depGraph?.removeOrphanNodes()
-      orphanNodes?.forEach((node) => {
+      orphanNodes?.forEach(node => {
         // only delete files that are in the output directory
         if (node.startsWith(argv.output)) {
           destinationsToDelete.add(node)
@@ -322,8 +357,16 @@ async function rebuildFromEntrypoint(
   clientRefresh: () => void,
   buildData: BuildData, // note: this function mutates buildData
 ) {
-  const { ctx, ignored, mut, initialSlugs, contentMap, toRebuild, toRemove, trackedAssets } =
-    buildData
+  const {
+    ctx,
+    ignored,
+    mut,
+    initialSlugs,
+    contentMap,
+    toRebuild,
+    toRemove,
+    trackedAssets,
+  } = buildData
 
   const { argv } = ctx
 
@@ -364,11 +407,15 @@ async function rebuildFromEntrypoint(
   const perf = new PerfTimer()
   console.log(chalk.yellow("Detected change, rebuilding..."))
   try {
-    const filesToRebuild = [...toRebuild].filter((fp) => !toRemove.has(fp))
+    const filesToRebuild = [...toRebuild].filter(fp => !toRemove.has(fp))
 
-    const trackedSlugs = [...new Set([...contentMap.keys(), ...toRebuild, ...trackedAssets])]
-      .filter((fp) => !toRemove.has(fp))
-      .map((fp) => slugifyFilePath(path.posix.relative(argv.directory, fp) as FilePath))
+    const trackedSlugs = [
+      ...new Set([...contentMap.keys(), ...toRebuild, ...trackedAssets]),
+    ]
+      .filter(fp => !toRemove.has(fp))
+      .map(fp =>
+        slugifyFilePath(path.posix.relative(argv.directory, fp) as FilePath),
+      )
 
     ctx.allSlugs = [...new Set([...initialSlugs, ...trackedSlugs])]
     const parsedContent = await parseMarkdown(ctx, filesToRebuild)
@@ -390,7 +437,9 @@ async function rebuildFromEntrypoint(
     await emitContent(ctx, filteredContent)
     console.log(chalk.green(`Done rebuilding in ${perf.timeSince()}`))
   } catch (err) {
-    console.log(chalk.yellow(`Rebuild failed. Waiting on a change to fix the error...`))
+    console.log(
+      chalk.yellow(`Rebuild failed. Waiting on a change to fix the error...`),
+    )
     if (argv.verbose) {
       console.log(chalk.red(err))
     }

@@ -36,11 +36,15 @@ function coerceToArray(input: string | string[]): string[] | undefined {
 
   // remove all non-strings
   return input
-    .filter((tag: unknown) => typeof tag === "string" || typeof tag === "number")
+    .filter(
+      (tag: unknown) => typeof tag === "string" || typeof tag === "number",
+    )
     .map((tag: string | number) => tag.toString())
 }
 
-export const FrontMatter: QuartzTransformerPlugin<Partial<Options> | undefined> = (userOpts) => {
+export const FrontMatter: QuartzTransformerPlugin<
+  Partial<Options> | undefined
+> = userOpts => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
     name: "FrontMatter",
@@ -52,23 +56,30 @@ export const FrontMatter: QuartzTransformerPlugin<Partial<Options> | undefined> 
             const { data } = matter(Buffer.from(file.value), {
               ...opts,
               engines: {
-                yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
-                toml: (s) => toml.parse(s) as object,
+                yaml: s => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+                toml: s => toml.parse(s) as object,
               },
             })
 
             if (data.title != null && data.title.toString() !== "") {
               data.title = data.title.toString()
             } else {
-              data.title = file.stem ?? i18n(cfg.configuration.locale).propertyDefaults.title
+              data.title =
+                file.stem ??
+                i18n(cfg.configuration.locale).propertyDefaults.title
             }
 
             const tags = coerceToArray(coalesceAliases(data, ["tags", "tag"]))
-            if (tags) data.tags = [...new Set(tags.map((tag: string) => slugTag(tag)))]
+            if (tags)
+              data.tags = [...new Set(tags.map((tag: string) => slugTag(tag)))]
 
-            const aliases = coerceToArray(coalesceAliases(data, ["aliases", "alias"]))
+            const aliases = coerceToArray(
+              coalesceAliases(data, ["aliases", "alias"]),
+            )
             if (aliases) data.aliases = aliases
-            const cssclasses = coerceToArray(coalesceAliases(data, ["cssclasses", "cssclass"]))
+            const cssclasses = coerceToArray(
+              coalesceAliases(data, ["cssclasses", "cssclass"]),
+            )
             if (cssclasses) data.cssclasses = cssclasses
 
             // fill in frontmatter

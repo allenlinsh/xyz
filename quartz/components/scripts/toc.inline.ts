@@ -1,5 +1,5 @@
 const bufferPx = 150
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
   for (const entry of entries) {
     const slug = entry.target.id
     const tocEntryElement = document.querySelector(`a[data-for="${slug}"]`)
@@ -19,7 +19,8 @@ function toggleToc(this: HTMLElement) {
   const content = this.nextElementSibling as HTMLElement | undefined
   if (!content) return
   content.classList.toggle("collapsed")
-  content.style.maxHeight = content.style.maxHeight === "0px" ? content.scrollHeight + "px" : "0px"
+  content.style.maxHeight =
+    content.style.maxHeight === "0px" ? content.scrollHeight + "px" : "0px"
 }
 
 function setupToc() {
@@ -40,6 +41,8 @@ document.addEventListener("nav", () => {
 
   // update toc entry highlighting
   observer.disconnect()
-  const headers = document.querySelectorAll("h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]")
-  headers.forEach((header) => observer.observe(header))
+  const headers = document.querySelectorAll(
+    "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
+  )
+  headers.forEach(header => observer.observe(header))
 })

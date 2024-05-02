@@ -15,13 +15,18 @@ import {
   pathToRoot,
   simplifySlug,
 } from "../../util/path"
-import { defaultListPageLayout, sharedPageComponents } from "../../../quartz.layout"
+import {
+  defaultListPageLayout,
+  sharedPageComponents,
+} from "../../../quartz.layout"
 import { FolderContent } from "../../components"
 import { write } from "./helpers"
 import { i18n } from "../../i18n"
 import DepGraph from "../../depgraph"
 
-export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpts) => {
+export const FolderPage: QuartzEmitterPlugin<
+  Partial<FullPageLayout>
+> = userOpts => {
   const opts: FullPageLayout = {
     ...sharedPageComponents,
     ...defaultListPageLayout,
@@ -29,14 +34,32 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpt
     ...userOpts,
   }
 
-  const { head: Head, header, beforeBody, pageBody, left, right, footer: Footer } = opts
+  const {
+    head: Head,
+    header,
+    beforeBody,
+    pageBody,
+    left,
+    right,
+    footer: Footer,
+  } = opts
   const Header = HeaderConstructor()
   const Body = BodyConstructor()
 
   return {
     name: "FolderPage",
     getQuartzComponents() {
-      return [Head, Header, Body, ...header, ...beforeBody, pageBody, ...left, ...right, Footer]
+      return [
+        Head,
+        Header,
+        Body,
+        ...header,
+        ...beforeBody,
+        pageBody,
+        ...left,
+        ...right,
+        Footer,
+      ]
     },
     async getDependencyGraph(_ctx, content, _resources) {
       // Example graph:
@@ -48,7 +71,10 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpt
         const slug = vfile.data.slug
         const folderName = path.dirname(slug ?? "") as SimpleSlug
         if (slug && folderName !== "." && folderName !== "tags") {
-          graph.addEdge(vfile.data.filePath!, joinSegments(folderName, "index.html") as FilePath)
+          graph.addEdge(
+            vfile.data.filePath!,
+            joinSegments(folderName, "index.html") as FilePath,
+          )
         }
       })
 
@@ -56,11 +82,11 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpt
     },
     async emit(ctx, content, resources): Promise<FilePath[]> {
       const fps: FilePath[] = []
-      const allFiles = content.map((c) => c[1].data)
+      const allFiles = content.map(c => c[1].data)
       const cfg = ctx.cfg.configuration
 
       const folders: Set<SimpleSlug> = new Set(
-        allFiles.flatMap((data) => {
+        allFiles.flatMap(data => {
           const slug = data.slug
           const folderName = path.dirname(slug ?? "") as SimpleSlug
           if (slug && folderName !== "." && folderName !== "tags") {
@@ -70,18 +96,19 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpt
         }),
       )
 
-      const folderDescriptions: Record<string, ProcessedContent> = Object.fromEntries(
-        [...folders].map((folder) => [
-          folder,
-          defaultProcessedContent({
-            slug: joinSegments(folder, "index") as FullSlug,
-            frontmatter: {
-              title: `${i18n(cfg.locale).pages.folderContent.folder}: ${folder}`,
-              tags: [],
-            },
-          }),
-        ]),
-      )
+      const folderDescriptions: Record<string, ProcessedContent> =
+        Object.fromEntries(
+          [...folders].map(folder => [
+            folder,
+            defaultProcessedContent({
+              slug: joinSegments(folder, "index") as FullSlug,
+              frontmatter: {
+                title: `${i18n(cfg.locale).pages.folderContent.folder}: ${folder}`,
+                tags: [],
+              },
+            }),
+          ]),
+        )
 
       for (const [tree, file] of content) {
         const slug = stripSlashes(simplifySlug(file.data.slug!)) as SimpleSlug
@@ -104,7 +131,13 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOpt
           allFiles,
         }
 
-        const content = renderPage(cfg, slug, componentData, opts, externalResources)
+        const content = renderPage(
+          cfg,
+          slug,
+          componentData,
+          opts,
+          externalResources,
+        )
         const fp = await write({
           ctx,
           content,

@@ -10,7 +10,7 @@ title: day 2
 
 ### Morning Tasks
 
-- [ ] 5k morning run
+- [x] 5k morning run
 - [ ] (3hr) Complete college auth feature for [Fireplace](https://makefireplace.com)
 - [ ] Read two chapters of The 5 AM Club
 - [ ] (1hr) Record and uplaod new episode of [Morning Walk & Talk](https://www.youtube.com/playlist?list=PLV4wvVQg3Ij9KLKERa1giDFAV5UQ4e9yg)

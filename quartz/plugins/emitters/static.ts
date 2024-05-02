@@ -30,6 +30,6 @@ export const Static: QuartzEmitterPlugin = () => ({
       recursive: true,
       dereference: true,
     })
-    return fps.map((fp) => joinSegments(argv.output, "static", fp)) as FilePath[]
+    return fps.map(fp => joinSegments(argv.output, "static", fp)) as FilePath[]
   },
 })

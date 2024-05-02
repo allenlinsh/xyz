@@ -58,7 +58,9 @@ function getComponentResources(ctx: BuildCtx): ComponentResources {
 
 async function joinScripts(scripts: string[]): Promise<string> {
   // wrap with iife to prevent scope collision
-  const script = scripts.map((script) => `(function () {${script}})();`).join("\n")
+  const script = scripts
+    .map(script => `(function () {${script}})();`)
+    .join("\n")
 
   // minify with esbuild
   const res = await transpile(script, {
@@ -68,7 +70,10 @@ async function joinScripts(scripts: string[]): Promise<string> {
   return res.code
 }
 
-function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentResources) {
+function addGlobalPageResources(
+  ctx: BuildCtx,
+  componentResources: ComponentResources,
+) {
   const cfg = ctx.cfg.configuration
 
   // popovers
@@ -169,11 +174,15 @@ export const ComponentResources: QuartzEmitterPlugin = () => {
       let googleFontsStyleSheet = ""
       if (cfg.theme.fontOrigin === "local") {
         // let the user do it themselves in css
-      } else if (cfg.theme.fontOrigin === "googleFonts" && !cfg.theme.cdnCaching) {
+      } else if (
+        cfg.theme.fontOrigin === "googleFonts" &&
+        !cfg.theme.cdnCaching
+      ) {
         // when cdnCaching is true, we link to google fonts in Head.tsx
         let match
 
-        const fontSourceRegex = /url\((https:\/\/fonts.gstatic.com\/s\/[^)]+\.(woff2|ttf))\)/g
+        const fontSourceRegex =
+          /url\((https:\/\/fonts.gstatic.com\/s\/[^)]+\.(woff2|ttf))\)/g
 
         googleFontsStyleSheet = await (
           await fetch(googleFontHref(ctx.cfg.configuration.theme))
@@ -192,13 +201,13 @@ export const ComponentResources: QuartzEmitterPlugin = () => {
 
           promises.push(
             fetch(url)
-              .then((res) => {
+              .then(res => {
                 if (!res.ok) {
                   throw new Error(`Failed to fetch font`)
                 }
                 return res.arrayBuffer()
               })
-              .then((buf) =>
+              .then(buf =>
                 write({
                   ctx,
                   slug: joinSegments("static", "fonts", filename) as FullSlug,

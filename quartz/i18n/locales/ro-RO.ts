@@ -70,13 +70,17 @@ export default {
     folderContent: {
       folder: "Dosar",
       itemsUnderFolder: ({ count }) =>
-        count === 1 ? "1 articol în acest dosar." : `${count} elemente în acest dosar.`,
+        count === 1
+          ? "1 articol în acest dosar."
+          : `${count} elemente în acest dosar.`,
     },
     tagContent: {
       tag: "Etichetă",
       tagIndex: "Indexul etichetelor",
       itemsUnderTag: ({ count }) =>
-        count === 1 ? "1 articol cu această etichetă." : `${count} articole cu această etichetă.`,
+        count === 1
+          ? "1 articol cu această etichetă."
+          : `${count} articole cu această etichetă.`,
       showingFirst: ({ count }) => `Se afișează primele ${count} etichete.`,
       totalTags: ({ count }) => `Au fost găsite ${count} etichete în total.`,
     },
