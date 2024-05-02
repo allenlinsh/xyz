@@ -17,6 +17,8 @@ jobs:
           node-version: 18.14
       - name: Install Dependencies
         run: npm ci
+      - name: Patch for Linux build
+        run: npm i @napi-rs/snappy-linux-x64-gnu -f
       - name: Build Quartz
         run: npx quartz build
       - name: Upload artifact
