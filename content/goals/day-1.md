@@ -1,8 +1,9 @@
 ---
 title: day 1
+date: 2024-05-01Z-4
 ---
 
-### Challenge
+### Challenge of the day
 
 - [x] Write about [rev](https://rev.school)'s 2024 vision
 

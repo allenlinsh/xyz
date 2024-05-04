@@ -15,9 +15,8 @@ _Morning_
   - What I want to achieve today
   - What I'm going to do to achieve it
 - `7:15 AM`: Go for a morning walk or run under direct sunlight for 15 minutes.
-- `7:45 AM`: Take a shower, get dressed, and eat breakfast.
+- `7:45 AM`: Take a shower, get dressed, eat breakfast, and drink coffee.
 - `8:00 AM`: Start working on the most mentally challenging task for the day.
-- `10:00 AM`: Take a short break and drink a cup of coffee.
 
 _Afternoon_
 
@@ -25,7 +24,7 @@ _Afternoon_
   - Fish oil
   - Vitamin D3
   - Vitamin B Complex
-- `3:00 PM`: Take an hour break to do chores, read a book, or pursue a hobby.
+- `3:00 PM`: Take an hour break to do chores and miscellaneous tasks.
 - `4:00 PM`: More work.
 
 _Evening_
@@ -36,14 +35,14 @@ _Evening_
 
 _Night_
 
-- `10:00 PM`: Stop working and do some journaling.
-- `11:00 PM`: Go to bed.
+- `11:00 PM`: Stop working and do some journaling.
+- `12:00 AM`: Go to bed.
 
 ---
 
 Some non-negotiable hard rules:
 
-- No social media before 9:00 AM.
+- No social media.
 - No meetings before 12:00 PM.
 - No scrolling on social media at any given time.
   - It is a tool for making money, not for entertainment.
