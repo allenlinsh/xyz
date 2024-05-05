@@ -1,9 +1,8 @@
 ---
 title: day _
 draft: true
+date: ____-__-__Z-4
 ---
-
-### Notes
 
 ### Challenge of the day
 
@@ -11,4 +10,4 @@ draft: true
 
 ### Backlog
 
-### Afternoon Tasks
+### Notes

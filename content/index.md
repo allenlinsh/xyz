@@ -16,3 +16,4 @@ Please feel free to reach out to me if you have any questions or just want to ch
 ### My Notes
 
 - [Discipline](/discipline)
+- [Brain Points](/brain-points)
