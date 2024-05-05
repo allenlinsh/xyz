@@ -26,5 +26,3 @@ date: 2024-05-04Z-4
 **12:26 AM**: I came back from weight training about 30 minutes ago. I started listening to $uicideboy$ as workout music and it's pretty good. I'm making chicken right now for some more protein because I'm definitely not getting one gram of protein per pound of body weight. In the meantime, I'm gonna write some more code and get ready to go to bed by 1 AM.
 
 **12:58 AM**: I just finished eating my protein intake for the day. I'm going to do some writing to reflect on my day and to improve my writing. Once I'm done, I'll do my night skincare routine then go to bed.
-
-**Reflection**:
