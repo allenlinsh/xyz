@@ -6,12 +6,12 @@ date: 2024-05-05Z-4
 
 ### Challenge of the day
 
-- [ ] Migrate [rev](https://rev.school)'s Notion workspace
+- [x] Migrate [rev](https://rev.school)'s Notion workspace
 
 ### Tasks
 
 - [ ] Complete college auth feature for [Fireplace](https://makefireplace.com)
-- [ ] Create plan for rev cohort 2
+- [x] Create plan for rev capsule
 
 ### Backlog
 
