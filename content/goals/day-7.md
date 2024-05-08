@@ -5,17 +5,19 @@ date: 2024-05-07Z-4
 
 ### Challenge of the day
 
-- [ ] Set up Github Project for Fireplace and migrate away from Jira
+- [x] Set up Github Project for Fireplace and migrate away from Jira
 
 ### Tasks
 
-- [ ] Discuss with Nick about Next Steps
-- [ ] Meet with Shrey about rev and v1. Learn about their approach, the tools they use, how they keep track of member engagement, and share ideas for rev capsule
-- [ ] Complete two tickets for Fireplace
+- [x] Complete college auth feature for [Fireplace](https://makefireplace.com)
+- [x] Discuss with Nick about Next Steps
+- [ ] Sign up for jury duty
+- [x] Re-activate Redis
+- [x] Meet with Shrey about rev and v1. Learn about their approach, the tools they use, how they keep track of member engagement, and share ideas for rev capsule
 
 ### Backlog
 
-- [ ] Reach out to Vivian, Sejin, and KP about marketing
+- [x] Reach out to Vivian, Sejin, and KP about marketing
 
 ### Notes
 
