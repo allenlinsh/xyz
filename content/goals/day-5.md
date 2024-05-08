@@ -1,6 +1,5 @@
 ---
 title: day 5
-draft: true
 date: 2024-05-05Z-4
 ---
 
@@ -16,5 +15,3 @@ date: 2024-05-05Z-4
 ### Backlog
 
 - [ ] Reach out to Vivian, Sejin, and KP about marketing (cc Nick)
-
-### Notes
