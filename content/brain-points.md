@@ -1,5 +1,6 @@
 ---
 title: Brain Points
+date: 2024-05-05Z-4
 ---
 
 Hey, if you're feeling depressed, confused, unmotivated, whatever it may be, cut the nonsense and do the hard work. Delete all your social media apps and video games. Stop scrolling. Put down your phone and get to work. Take out a piece of paper, list what needs to be done, and start working.

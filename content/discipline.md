@@ -1,5 +1,6 @@
 ---
 title: Discipline
+date: 2024-05-01Z-4
 ---
 
 ### Do the hard work, especially when you don't feel like it

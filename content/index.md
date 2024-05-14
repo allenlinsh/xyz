@@ -1,5 +1,6 @@
 ---
 title: Welcome to my blog!
+date: 2024-05-01Z-4
 ---
 
 My name is Allen Lin and I'm a 4th-year CS student at Northeastern University. I was born in Taiwan and I moved to the United States when I was 13. I'm deeply passionate about AGI, tech entrepreneurship, and education. My goal is to accelerate innovation and help solve the most significant challenges of the 21st century - namely, understanding how the human brain works.

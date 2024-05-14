@@ -1,5 +1,6 @@
 ---
 title: Fireplace
+date: 2024-05-02Z-4
 ---
 
 Today is May 2nd, 2024, and we have eight months left in the year. I think it's more realistic to split our goals into two parts, each spanning 4 months, or a quarter.

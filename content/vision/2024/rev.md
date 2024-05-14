@@ -1,5 +1,6 @@
 ---
 title: rev
+date: 2024-05-02Z-4
 ---
 
 [rev](https://rev.school) started as a community of builders and founders back in March 2024. The goal was simply to **create a community where technical founders can come together to learn, build, and bounce ideas with each other**. Building alone is difficult, and I experienced that in firsthand when I was building [Fireplace](https://makefireplace.com) during my gap year in college.
