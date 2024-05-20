@@ -5,24 +5,28 @@ draft: true
 
 ### P0
 
-- [ ] Reach out to HONU for onboarding
-- [ ] Follow-up with Origin
 - [ ] Add username field to profile settings
 - [ ] Check onboarding for unique username (check if username is already in use, and show error message)
+- [ ] Add url field for communities
 - [ ] Send [college verification & claim username] email update to mailing list
+- [ ] Disable rsvp if event is over
 - [ ] Send a notification when a friend joins Fireplace
-- [ ] Apply for AWS Activate through IDEA Set Stage
+- [ ] Store event timezone in backend
+- [ ] Google Calendar integration
 
 ### P1
 
 - [ ] Create a list of interview questions for BJJ club
+- [ ] Blog template using [expo blog](https://expo.dev/blog)
 - [ ] Set up blog template for Fireplace Community Stories
-- [ ] Migrate discussion post to only have content field
+- [ ] Migrate discussion post to only have content field (?)
 - [ ] Follow-up with Mosaic on Prototype Fund
+- [ ] Create software engineer job listing for Fireplace
 - [ ] Turn off RSVP after event is over, and send notification for new comment in event
-- [ ] Add empty state for home feed
+- [ ] Add empty state for home feed when there's a community but no events / posts
 - [ ] Remove ring around web login phone number
 - [ ] Add loading indicator for web login (phone number)
+- [ ] Add bookmarked events and posts to profile
 
 ### P2
 
@@ -49,3 +53,7 @@ draft: true
 - [x] Fix web app foundation endpoints when logging out (clear cache)
 - [x] Design Discover UI mockup on Figma
 - [x] Generic description on organization screen
+- [x] Reach out to Srijith about helping out over the summer
+- [x] Reach out to HONU for onboarding
+- [x] Follow-up with Origin
+- [x] Apply for AWS Activate through IDEA Set Stage

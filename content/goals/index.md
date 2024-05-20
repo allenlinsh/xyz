@@ -1,5 +1,6 @@
 ---
 title: Goals
+date: 2024-05-01Z-4
 ---
 
 Starting today, I want to document (build in public) my journey to making my first million dollars. I will set goals each day before I go to bed, follow through the next day when I wake up, and repeat the process until I reach $1M.
