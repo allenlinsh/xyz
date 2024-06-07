@@ -11,7 +11,6 @@ Please feel free to reach out to me if you have any questions or just want to ch
 
 ### My Journal
 
-- [Goals](/goals)
 - [Vision](/vision)
 
 ### My Notes

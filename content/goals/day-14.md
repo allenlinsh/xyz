@@ -1,5 +1,6 @@
 ---
 title: day 14
+draft: true
 date: 2024-05-16Z-4
 ---
 

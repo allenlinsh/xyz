@@ -1,5 +1,6 @@
 ---
 title: day 10
+draft: true
 date: 2024-05-10Z-4
 ---
 

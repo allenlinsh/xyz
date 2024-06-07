@@ -1,5 +1,6 @@
 ---
 title: day 1
+draft: true
 date: 2024-05-01Z-4
 ---
 

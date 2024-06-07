@@ -1,5 +1,6 @@
 ---
 title: day 11
+draft: true
 date: 2024-05-13Z-4
 ---
 

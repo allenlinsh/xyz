@@ -1,5 +1,6 @@
 ---
 title: day 8
+draft: true
 date: 2024-05-08Z-4
 ---
 
