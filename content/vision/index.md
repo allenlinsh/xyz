@@ -12,20 +12,22 @@ date: 2024-05-02Z-4
 ### Short-term goals
 
 - [ ] Reach 10,000 users on [Fireplace](https://makefireplace.com)
-- [ ] Set up a social content management system for [Morning Walk & Talk](https://www.youtube.com/playlist?list=PLV4wvVQg3Ij9KLKERa1giDFAV5UQ4e9yg)
-- [ ] Reach 1,000 subscribers on [YouTube](https://www.youtube.com/@alnln222)
 - [ ] Pass IDEA Go Stage for Fireplace
+- [ ] Reach 500 members in [rev](https://rev.school)
+- [ ] Get into [YC](https://ycombinator.com)
 
 ### Mid-term goals
 
 - [ ] Graduate from Northeastern University
+- [ ] Reach 1,000 members in rev
+- [ ] Reach 1,000,000 users on Fireplace
 - [ ] Make my first million dollars
-- [ ] Reach 1,000 members in [rev](https://rev.school)
 
 ### Long-term goals
 
 - [ ] Sell my first company
 - [ ] Start an educational organization to help young entrepreneurs
+- [ ] Invest in AGI/neurotech
 
 _Updated on May 1, 2024_
 
